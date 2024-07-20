@@ -1,0 +1,426 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Roboto";
+  font-size: 20px; }
+
+.card-no-border .card {
+  border: 0px;
+  border-radius: 4px;
+  -webkit-box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05); }
+
+.card-body {
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  padding: 1.25rem; }
+
+.comment-widgets .comment-row:hover {
+  background: rgba(0, 0, 0, 0.02);
+  cursor: pointer; }
+
+.comment-widgets .comment-row {
+  border-bottom: 1px solid rgba(120, 130, 140, 0.13);
+  padding: 15px; }
+
+.comment-text:hover {
+  visibility: hidden; }
+
+.comment-text:hover {
+  visibility: visible; }
+
+.label {
+  padding: 3px 10px;
+  line-height: 13px;
+  color: #ffffff;
+  font-weight: 400;
+  border-radius: 4px;
+  font-size: 75%; }
+
+.round img {
+  border-radius: 100%; }
+
+.label-info {
+  background-color: #1976d2; }
+
+.label-success {
+  background-color: green; }
+
+.label-danger {
+  background-color: #ef5350; }
+
+.action-icons a {
+  padding-left: 7px;
+  vertical-align: middle;
+  color: #99abb4; }
+
+.action-icons a:hover {
+  color: #1976d2; }
+
+.mt-100 {
+  margin-top: 100px; }
+
+.mb-100 {
+  margin-bottom: 100px; }
+
+.commentContainer {
+  margin-top: 50px;
+  width: 900px;
+  box-shadow: 0px 10px 16px 0px rgba(0, 0, 0, 0.4);
+  border-radius: 15px;
+  margin-bottom: 50px; }
+
+.commentContainer__header {
+  margin: 0 !important; }
+
+.comment__text {
+  position: relative;
+  transform: translateY(20px);
+  width: 900px;
+  border-radius: 15px;
+  box-sizing: border-box;
+  box-shadow: 0px 10px 16px 0px rgba(0, 0, 0, 0.4); }
+
+.comment__like {
+  padding: 20px;
+  border-radius: 50%;
+  background-color: var(--color-4);
+  transform: translateY(30px); }
+
+.comment__like:hover {
+  cursor: pointer;
+  background-color: var(--color-1);
+  transition: all 0.35s ease-in-out; }
+
+.comment__individual {
+  border-radius: 15px;
+  width: 100%;
+  height: 90px;
+  resize: none;
+  padding: 25px;
+  overflow: hidden;
+  background-color: var(--color-2);
+  transition: all 0.35s ease-in-out;
+  border: unset; }
+
+.comment__individual:focus {
+  outline: none; }
+
+.comment__individual:not(:placeholder-shown) + .comment__focus,
+.comment__individual:focus + .comment__focus {
+  top: -12px;
+  opacity: 0;
+  padding: 0px 10px;
+  display: inline-block; }
+
+.comment__focus {
+  font-weight: 700;
+  top: 20px;
+  left: 20px;
+  user-select: none;
+  color: #b0b0b0;
+  pointer-events: none;
+  position: absolute;
+  transition: all 0.35s ease-in-out;
+  background-color: #1976d200; }
+
+.comment__tool {
+  transform: translateY(-5px);
+  height: 10px;
+  border-radius: 0px 0px 10px 10px;
+  border-top: none;
+  padding: 0px 20px;
+  display: flex;
+  align-items: center; }
+
+.comment__tool-img {
+  padding: 8px;
+  border-radius: 50%; }
+
+.comment__tool-img:hover,
+.comment__tool-send:hover {
+  cursor: pointer;
+  background-color: #ef5350; }
+
+.comment__tool-send {
+  padding: 8px;
+  border-radius: 50%;
+  right: 20px;
+  position: absolute;
+  bottom: 10px;
+  transition: all 0.3s linear; }
+
+.comment__user {
+  display: flex; }
+
+.comment__user-avatar {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 100%;
+  margin: 20px 20px 20px 0px; }
+
+.comment__user-block {
+  width: 100%;
+  border-radius: 10px;
+  background-color: var(--color-4);
+  margin: 20px 20px 20px 0px;
+  padding: 10px; }
+
+.comment__user-name {
+  font-size: 25px;
+  font-weight: 500; }
+
+.comment__user-btn {
+  padding: 2px;
+  margin: 10px 0px 0px 0px;
+  border-radius: 10px;
+  background-color: var(--color-4); }
+
+.comment__user-like {
+  padding: 2px 6px;
+  margin: 10px 0px 0px 0px;
+  border-radius: 10px;
+  background-color: var(--color-4); }
+
+.comment__user-see,
+.comment__user-nosee {
+  margin: 20px 0px 10px 5px; }
+
+.comment__user-see:hover,
+.comment__user-nosee:hover,
+.comment__user-like:hover {
+  cursor: pointer; }
+
+.comment__user-btn:hover {
+  cursor: pointer; }
+
+.comment__user-dots {
+  position: relative;
+  margin: auto -15px auto -5px;
+  padding: 8px;
+  color: var(--color-5);
+  border-radius: 50%; }
+
+.comment__user-dots:hover {
+  cursor: pointer;
+  background-color: var(--color-1); }
+
+.commentContainer__infor {
+  display: flex;
+  padding-bottom: 30px !important;
+  position: relative;
+  cursor: unset !important; }
+
+.commentContainer__infor:hover {
+  background-color: unset !important; }
+
+.commentContainer__name {
+  padding-left: 20px; }
+
+.commentContaier__child {
+  margin-top: 10px;
+  border-radius: 15px;
+  box-shadow: 0px 10px 16px 0px rgba(0, 0, 0, 0.4); }
+
+.inputImage {
+  transform: translateY(-10px);
+  border-radius: 15px;
+  cursor: pointer !important;
+  outline: unset; }
+
+.custom-file-input {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  cursor: pointer !important;
+  border-radius: 15px; }
+
+.custom-file-input input {
+  display: block;
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  cursor: pointer !important; }
+
+.file-label {
+  display: block;
+  background-color: #ff8282;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer !important;
+  color: black;
+  border: 1px solid #465375;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s linear;
+  pointer-events: auto;
+  border-radius: 15px; }
+
+.comment-button {
+  display: block;
+  background-color: #b9f0b9;
+  padding: 10px;
+  margin-top: 50px;
+  border: none;
+  border-radius: 10px;
+  right: 20px;
+  top: -35px;
+  position: absolute;
+  transition: 0.35s ease-in-out; }
+
+.comment-button:hover {
+  background-color: #76EE76;
+  cursor: pointer; }
+
+.comment-button i {
+  transition: all 0.3s linear; }
+
+.comment-button:hover i {
+  transform: rotate(360deg); }
+
+.commentChild {
+  transform: scaleY(0);
+  transition: all 0.3s linear;
+  opacity: 0;
+  max-height: 0; }
+
+.comment-button-active {
+  transform: scaleY(1);
+  max-height: 50000px;
+  opacity: 1; }
+
+.date {
+  color: #b0b0b0; }
+
+.buttonDelete {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  background-color: #ff8282;
+  border-radius: 15px;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s linear;
+  padding: 10px 15px;
+  cursor: pointer; }
+
+.buttonDelete:hover {
+  background-color: #ef5350; }
+
+.confirm {
+  width: 30%;
+  height: 200px;
+  background-color: var(--color-2);
+  border-radius: 10px;
+  border: 1px solid black;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2; }
+
+.confirm__top {
+  top: 0;
+  border-radius: 10px 10px 0px 0px;
+  width: 100%;
+  height: 40px;
+  position: absolute;
+  background-color: #76EE76; }
+
+.confirm__title {
+  padding-top: 50px;
+  text-align: center; }
+
+.confirm__accept,
+.confirm__reject {
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  margin-left: 20px;
+  cursor: pointer;
+  transition: all 0.3s linear; }
+
+.confirm__accept {
+  background-color: #ff8282; }
+
+.confirm__accept:hover {
+  background-color: #ef5350; }
+
+.confirm__reject {
+  background-color: #76EE76; }
+
+.confirm__reject:hover {
+  background-color: #01ff01; }
+
+.dp-n {
+  display: none; }
+
+.p-2 {
+  position: relative; }
+
+.scoreComment {
+  position: absolute;
+  top: 55px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: block;
+  color: #b0b0b0; }
+
+h5 {
+  position: relative;
+  display: inline; }
+
+h5 i {
+  transition: all 0.3s linear;
+  position: absolute;
+  right: -35px;
+  color: #ef5350;
+  transform: scale(0, 0);
+  cursor: pointer; }
+
+.frist {
+  transform: scale(1, 1) !important; }
+
+.submit {
+  margin: 0 !important;
+  background-color: white !important;
+  position: fixed;
+  top: -100%;
+  z-index: 100;
+  transform: translateY(-50%);
+  transition: all 0.3s linear; }
+
+span img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover; }
+
+.positionAuthor {
+  background-color: #465375;
+  padding: 5px 10px;
+  position: absolute;
+  top: -120%;
+  border-radius: 5px;
+  color: white;
+  transition: all 0.3s linear;
+  opacity: 0;
+  visibility: hidden;
+  font-size: 14px;
+  max-width: 500px; }
+
+h5 a {
+  white-space: nowrap; }
+
+h5 a:hover .positionAuthor {
+  visibility: visible;
+  opacity: 1; }
+
+.gradientColor {
+  background: linear-gradient(to left, #a0a 0%, red 100%);
+  background-clip: text;
+  color: transparent; }
+
+.header__nav-click::after {
+  transform: scale(1) !important; }

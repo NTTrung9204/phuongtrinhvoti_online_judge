@@ -1,0 +1,37 @@
+<link rel="stylesheet" href="../../../../../css/admin.css">
+<link rel="stylesheet" href="../../../../../css/member.css">
+<div style="margin-top: 300px;" class="bodyDetail">
+    <form id="formassignment" method="POST" action="./update">
+    
+    <div class="input-container">
+        <label for="title">Tên dạng</label>
+        <input value="{{assignment.title}}" type="text" id="title" name="title">
+
+        <label for="type">Mã dạng</label>
+        <input value="{{assignment.type}}" type="text" id="type" name="type">
+
+        <label for="content">Câu dẫn</label>
+        <input value="{{assignment.content}}" content="text" id="content" name="content">
+
+        <label for="image">Đề bài</label>
+        <textarea id="image" name="image">{{assignment.image}}</textarea>
+
+        <label for="date">Ngày tạo</label>
+        <input value="{{assignment.date}}" type="text" id="date" name="date">
+
+        <label for="author">Người tạo</label>
+        <input value="{{assignment.author}}" type="text" id="author" name="author">
+
+        <label for="resource">Nguồn</label>
+        <input value="{{assignment.resource}}" type="text" id="resource" name="resource">
+        
+        <label for="score">Điểm</label>
+        <input value="{{assignment.score}}" type="text" id="score" name="score">
+
+        <label for="deleted">Deleted:</label>
+        <input value="{{assignment.deleted}}" type="text" id="deleted" name="deleted">
+
+        <button id="submitassignment" type="submit">Lưu</button>
+    </div>
+    </form>
+</div>

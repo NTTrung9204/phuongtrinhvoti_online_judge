@@ -1,0 +1,111 @@
+<link rel="stylesheet" href="css/login.css">
+<link rel="stylesheet" href="css/contest.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<div class="container">
+    <form action="" class="form-login" method="post">
+        <h1 style="font-size: 25px;" class="form-heading">Đăng Nhập </h1>
+        <div id="error">{{error}}</div>
+        <div class="form-group">
+            <i class="fa-regular fa-user"></i>
+            <input style="font-size: 16px;" type="text" class="form-input" placeholder="Tên đăng nhập" name="username" id="username">
+        </div>
+        <div class="form-group">
+            <i class="fa-solid fa-key"></i>
+            <input style="font-size: 16px;" type="password" class="form-input" placeholder="Nhập mật khẩu" id="password" name="password">
+            <i class="fa-solid fa-eye-slash eye eye-close" id="eye-close"></i>
+            <i class="fa-solid fa-eye eye eye-open hidden" id="eye-open"></i>
+        </div>
+        <input style="font-size: 16px;" type="submit" value="Đăng Nhập" class="form-submit">
+    </form>
+</div>
+<div class="toast">
+
+    <div class="toast-content">
+        <i id="iconToast" class="fas fa-exclamation-triangle check"></i>
+
+        <div class="message">
+            <span id="text-1" class="text text-1">Thất bại!</span>
+            <span id="text-2" class="text text-2">Bạn cần đăng nhập để làm thao tác này</span>
+        </div>
+    </div>
+    <i class="far fa-times-circle close" style="color: #000000;"></i>
+
+    <div id="progress" class="progress"></div>
+</div>
+<script>
+    var eyeclose = document.getElementById("eye-close");
+    var eyeopen = document.getElementById("eye-open");
+    var password = document.getElementById("password");
+
+    eyeclose.addEventListener("click", function () {
+        eyeopen.classList.remove("hidden");
+        eyeclose.classList.add("hidden");
+        password.setAttribute("type", "textt");
+    });
+    eyeopen.addEventListener("click", function () {
+        eyeopen.classList.add("hidden");
+        eyeclose.classList.remove("hidden");
+        password.setAttribute("type", "password");
+    });
+
+        function createToast(text1, text2, status) {
+        var toast = document.getElementsByClassName("toast")[0]
+        var IconClose = document.getElementsByClassName("close")[0]
+        var textOne = document.getElementById("text-1")
+        var textTwo = document.getElementById("text-2")
+        var iconToast = document.getElementById("iconToast")
+        var progress = document.getElementById("progress")
+
+        textOne.innerText = text1
+        textTwo.innerText = text2
+
+        iconToast.classList = [];
+
+        (status === 1) ? iconToast.classList.add('fas', 'fa-check-circle', 'success') : iconToast.classList.add('fas', 'fa-exclamation-triangle', 'check')
+
+        var beforeProgress = window.getComputedStyle(progress, '::before');
+
+        try {
+            var styleProgress = document.styleSheets[6].cssRules[60]
+            styleProgress.style.backgroundColor = (status === 1) ? "#00ff00" : "#ff2626"
+        }
+        catch {
+
+        }
+
+        IconClose.addEventListener("click", () => {
+            toast.classList.remove("active");
+
+            setTimeout(() => {
+                progress.classList.remove("active");
+            }, 300);
+
+            clearTimeout(timer1);
+            clearTimeout(timer2);
+        });
+
+        activeEffect(toast, progress)
+    }
+
+    function activeEffect(toast, progress) {
+        toast.classList.add("active");
+        progress.classList.add("active");
+
+        let timer1 = setTimeout(() => {
+            toast.classList.remove("active");
+        }, 5000);
+
+        let timer2 = setTimeout(() => {
+            progress.classList.remove("active");
+        }, 5300);
+    }
+    const searchParams = new URLSearchParams(window.location.search);
+    if(searchParams.has('checkRegister')){
+        setTimeout(()=>{
+            const checkRegister = searchParams.get('checkRegister')
+            if(checkRegister == 'true'){
+                createToast('Thành công', 'Bạn đã đăng ký tài khoản thành công!', 1)
+            }
+        }, 300)
+    }
+</script>

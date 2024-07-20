@@ -1,0 +1,610 @@
+<link rel="stylesheet" href="../../css/announcement.css">
+<link rel="stylesheet" href="../../css/assignment_view.css">
+<section class="body">
+    <div class="content">
+        <a href="/assignment" class="content__btn">Quay lại</a>
+        <div class="content__main">
+            {{#if isSolved}}
+            <p style="color: #2dda2d;" class="content__main__title">{{assignment.title}} <i class="fas fa-check-circle"></i></p>
+            {{else}}
+            <p class="content__main__title">{{assignment.title}} <i class="fas fa-minus-circle"></i></p>
+
+            {{/if}}
+            <p class="content__main-topic">{{assignment.content}} <br>
+                {{{assignment.image}}}
+            </p>
+            <p class="content__main__author">Người đăng: {{assignment.author}}</p>
+            <p class="content__main-score">Điểm: {{assignment.score}}</p>
+            <p class="content__main__time">Ngày đăng: {{assignment.date}}</p>
+            <p class="content__main__source">Nguồn: {{assignment.resource}}</p>
+        </div>
+        <div class="comment__text">
+            <form method="post" enctype="multipart/form-data" id="commentMain">
+                <textarea class="comment__individual" type="text" name="comment" placeholder=" "></textarea>
+                <label class="comment__focus" for="comment">Comment</label>
+                <div class="comment__tool">
+                    <i id="submitComment" class="comment__tool-send far fa-paper-plane"></i>
+                </div>
+            </form>
+        </div>
+        <div class="commentContainer">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div id="TrungDzai" class="comment-widgets m-b-20">
+                            {{#each assignment.comment}}
+                            {{#condition this.deleted 0}}
+                            <div id="{{../this.cmt_id}}t" class="d-flex flex-row comment-row commentContainer__infor">
+                                {{#condition ../../user.username ../this.au}}
+                                    <div id="{{../this.cmt_id}}" class="buttonDelete buttonParent" style="right: 170px;">Xóa
+                                    </div>
+                                {{else}}
+                                    {{#condition ../../role "admin"}}
+                                        <div id="{{../this.cmt_id}}" class="buttonDelete buttonParent" style="right: 170px;">Xóa
+                                        </div>
+                                    {{/condition}}
+                                {{/condition}}
+                                <button class="comment-button" type="button">
+                                    Xem thêm
+                                    <i class="fas fa-angle-double-down" style="color: #000000;"></i>
+                                </button>
+                                <div class="p-2">
+                                    {{#if ../this.isLike}}
+                                    <span style="color: rgb(239, 83, 80);" class="scoreComment">{{../this.likes}}</span>
+                                    {{else}}
+                                    <span class="scoreComment">{{../this.likes}}</span>
+                                    {{/if}}
+                                    <span class="round">
+                                        <img src="/img/{{../this.avatar}}" alt="user" width="50">
+                                    </span>
+                                </div>
+                                <div class="comment-text w-100 commentContainer__name">
+                                    <h5>
+                                        <a style="color: {{../this.color}};" href="/user/{{../this.idAuthor}}">
+                                            <span class="positionAuthor">{{../this.position}} - {{../this.score}}</span>
+                                            {{!-- <span class="{{#condition ../this.role "admin"}}gradientColor {{/condition}}"> --}}
+                                            <span style="font-weight: {{../this.fontWeight}} !important;">{{../this.au}}</span>
+                                            
+                                            </a>
+                                        <span data-id="{{../this.cmt_id}}" class="heart">
+                                            {{#if ../this.isLike}}
+                                            <i class="far fa-heart iconFrist"></i>
+                                            <i class="fas fa-heart frist iconSecond"></i>
+                                            {{else}}
+                                            <i class="far fa-heart frist iconFrist"></i>
+                                            <i class="fas fa-heart iconSecond"></i>
+                                            {{/if}}
+                                        </span>
+                                    </h5>
+                                    <div class="comment-footer">
+                                        <span class="date">{{../this.date}}</span>
+                                    </div>
+                                    <p class="m-b-5 m-t-10">{{../this.cmt}}</p>
+                                    <div id="{{../this.cmt_id}}c" class="commentChild">
+                                        {{#each ../this.commentChild}}
+                                        {{#condition this.deleted 0}}
+                                        <div id="{{../this.cmt_id}}t" class="commentContaier__child">
+                                            <div class="d-flex flex-row comment-row commentContainer__infor">
+                                                {{#condition ../../../../user.username ../this.au}}
+                                                <div id="{{../this.cmt_id}}" class="buttonDelete">Xóa</div>
+                                                {{else}}
+                                                    {{#condition ../../../../role "admin"}}
+                                                        <div id="{{../this.cmt_id}}" class="buttonDelete">Xóa
+                                                        </div>
+                                                    {{/condition}}
+                                                {{/condition}}
+                                                <div class="p-2">
+                                                    {{#if ../this.isLike}}
+                                                    <span style="color: rgb(239, 83, 80);"
+                                                        class="scoreComment">{{../this.likes}}</span>
+                                                    {{else}}
+                                                    <span class="scoreComment">{{../this.likes}}</span>
+                                                    {{/if}}
+                                                    <span class="round"><img src="/img/{{../this.avatar}}"
+                                                            alt="user" width="50"></span>
+                                                </div>
+                                                <div class="comment-text w-100 commentContainer__name">
+                                                    <h5>
+                                                        <a style="color: {{../this.color}};" href="/user/{{../this.idAuthor}}">
+                                                        <span class="positionAuthor">{{../this.position}} - {{../this.score}}</span>
+                                                        {{!-- <span class="{{#condition ../this.role "admin"}}gradientColor {{/condition}}"> --}}
+                                                        
+                                                        <span style="font-weight: {{../this.fontWeight}} !important;">{{../this.au}}</span>
+                                                        
+                                                        </a>
+
+                                                        <span data-id="{{../this.cmt_id}}" class="heart">
+                                                            {{#if ../this.isLike}}
+                                                            <i class="far fa-heart iconFrist"></i>
+                                                            <i class="fas fa-heart frist iconSecond"></i>
+                                                            {{else}}
+                                                            <i class="far fa-heart frist iconFrist"></i>
+                                                            <i class="fas fa-heart iconSecond"></i>
+                                                            {{/if}}
+                                                        </span>
+                                                    </h5>
+                                                    <div class="comment-footer">
+                                                        <span class="date">{{../this.date}}</span>
+                                                    </div>
+                                                    <p class="m-b-5 m-t-10">{{../this.cmt}}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{/condition}}
+                                        {{/each}}
+                                        <div class="comment__text" style="width: 100%; min-width:940px ">
+                                            <form method="post" enctype="multipart/form-data" id="commentMainChild">
+                                                <textarea data-id="{{../this.cmt_id}}"
+                                                    class="comment__individual CommentChildInput" type="text"
+                                                    name="comment" placeholder=" "></textarea>
+                                                <label class="comment__focus" for="comment">Comment</label>
+                                                <div class="comment__tool">
+                                                    <i
+                                                        class="comment__tool-send far fa-paper-plane CommentChildButton"></i>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{/condition}}
+                            {{/each}}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="sideBarright">
+        <ul class="sideBarright__nav">
+            <li id="submitContent" class="sideBarright__nav-click">
+                <div class="sideBarright__nav__item"><i class="fas fa-paper-plane" style="color: #000000;"></i> Gửi lời
+                    giải</div>
+            </li>
+            <a href="../solution/{{assignment._id}}" class="sideBarright__nav__item">
+                <li class="sideBarright__nav-click">
+                    <i class="fas fa-file-alt" style="color: #000000;"></i> Các bài nộp
+                </li>
+            </a>
+            {{!-- <li class="sideBarright__nav-click"><a href="" class="sideBarright__nav__item">Xem gợi ý</a></li> --}}
+            {{!-- <li class="sideBarright__nav-click"><a href="" class="sideBarright__nav__item">Giải của tôi</a></li>
+            --}}
+            {{#if isSolved}}
+            <li style="background-color: #fff;" class="sideBarright__nav-click">
+                <a style="color: #2dda2d;" class="sideBarright__nav__item__status-succ"><i
+                        class="fas fa-check-circle"></i> Đã hoàn
+                    thành
+                </a>
+            </li>
+            {{else}}
+            <li style="background-color: #fff;" class="sideBarright__nav-click">
+                <a style="color: #DE2121; !important" class="sideBarright__nav__item__status-failure"><i
+                        class="fas fa-minus-circle"></i> Chưa hoàn
+                    thành
+                </a>
+            </li>
+            {{/if}}
+        </ul>
+        {{!-- <a href="" class="sideBarright__btn">Bài tiếp theo</a> --}}
+    </div>
+    <div class="background dp-n">
+
+    </div>
+
+    <div class="submit">
+        <i class="submit__times fas fa-times"></i>
+        <form method="post" enctype="multipart/form-data" id="submitAssignment">
+            <textarea name="descriptionA" type="text" class="submit__text" placeholder="Hãy viết gì đó..."
+                style="margin-top: 30px;"></textarea>
+            <div class="submitImage">
+                <div class="inputImage">
+                    <label for="fileInput" class="custom-file-input">
+                        <input name="imageSubmit" class="imageCheckOnchange" type="file" id="fileInput"
+                            accept="image/*">
+                        <span class="file-label">Trang thứ nhất</span>
+                    </label>
+                </div>
+                <div class="inputImage">
+                    <label for="fileInput" class="custom-file-input">
+                        <input name="imageSubmit" class="imageCheckOnchange" type="file" id="fileInput"
+                            accept="image/*">
+                        <span class="file-label">Trang thứ hai</span>
+                    </label>
+                </div>
+                <div class="inputImage">
+                    <label for="fileInput" class="custom-file-input">
+                        <input name="imageSubmit" class="imageCheckOnchange" type="file" id="fileInput"
+                            accept="image/*">
+                        <span class="file-label">Trang thứ ba</span>
+                    </label>
+                </div>
+            </div>
+            <textarea name="descriptionB" type="text" class="submit__text" placeholder="Hãy viết gì đó..."></textarea>
+            <button id="buttonSubmitSolution" class="submitSolution" form="submitAssignment">Nộp bài</button>
+        </form>
+    </div>
+</section>
+<div id="confirmDelete" class="confirm dp-n">
+    <div class="confirm__top" style="padding: 10px">Thông báo</div>
+    <p class="confirm__title">Bạn có chắc chắn muốn xóa bình luận này?</p>
+    <div style="position: absolute; bottom: 20px; right: 30px">
+
+        <button data-id="" class="confirm__accept" type="button">Đồng
+            ý</button>
+        <button class="confirm__reject" type="button">Hủy</button>
+    </div>
+</div>
+<div class="confirm__block dp-n" style="
+                width: 100%;
+                position: fixed;
+                top: 0;
+                left: 0;
+                padding: 250px;
+                z-index: 1;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.2);
+            ">
+</div>
+<div class="toast">
+
+    <div class="toast-content">
+        <i id="iconToast" class="fas fa-exclamation-triangle check"></i>
+
+        <div class="message">
+            <span id="text-1" class="text text-1">Thất bại!</span>
+            <span id="text-2" class="text text-2">Bạn cần đăng nhập để làm thao tác này</span>
+        </div>
+    </div>
+    <i class="far fa-times-circle close" style="color: #000000;"></i>
+
+    <div id="progress" class="progress"></div>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io();
+
+    var heartIcon = document.getElementsByClassName("heart")
+    var iconFrist = document.getElementsByClassName("iconFrist")
+    var iconSecond = document.getElementsByClassName("iconSecond")
+    var scoreComment = document.getElementsByClassName("scoreComment")
+    for (let i = 0; i < heartIcon.length; i++) {
+        heartIcon[i].addEventListener("click", () => {
+            socket.emit("reactCommentAssignmentView", `{{user.username}}`, `{{assignment._id}}`, heartIcon[i].getAttribute("data-id"), i)
+        })
+    }
+
+    var CommentChildButton = document.getElementsByClassName("CommentChildButton")
+    var CommentChildInput = document.getElementsByClassName("CommentChildInput")
+
+    for (let i = 0; i < CommentChildButton.length; i++) {
+        CommentChildButton[i].addEventListener("click", () => {
+            let cmt_id = CommentChildInput[i].getAttribute("data-id")
+            let cmt = CommentChildInput[i].value
+            console.log(cmt_id)
+            socket.emit("commentAssignment", cmt, `{{user.username}}`, `{{assignment._id}}`, cmt_id)
+            CommentChildInput[i].value = ""
+        })
+    }
+
+    var CommentButton = document.getElementsByClassName('comment-button');
+    var buttonParent = document.getElementsByClassName('buttonParent');
+
+    var commentChild = document.getElementsByClassName('commentChild');
+    function activecommentChild(index) {
+        commentChild[index].classList.add('comment-button-active');
+    }
+    for (let i = 0; i < CommentButton.length; i++) {
+        CommentButton[i].addEventListener('click', () => {
+            activecommentChild(i)
+            CommentButton[i].style.display = "none";
+            buttonParent[i].style.right = "30px"
+        })
+    }
+
+    function addCommentToDiv(author, comment, date, imageUrl, target) {
+        // Tạo các phần tử HTML
+        var commentDiv = document.createElement("div");
+        commentDiv.classList.add("d-flex", "flex-row", "comment-row", "commentContainer__infor");
+
+        var imageDiv = document.createElement("div");
+        imageDiv.classList.add("p-2");
+        var imageSpan = document.createElement("span");
+        imageSpan.classList.add("round");
+        var image = document.createElement("img");
+        image.src = imageUrl;
+        image.alt = "user";
+        image.width = 50;
+        imageSpan.appendChild(image);
+        imageDiv.appendChild(imageSpan);
+
+        var textDiv = document.createElement("div");
+        textDiv.classList.add("comment-text", "w-100", "commentContainer__name");
+        var heading = document.createElement("h5");
+        heading.textContent = author;
+        var footer = document.createElement("div");
+        footer.classList.add("comment-footer");
+        var dateSpan = document.createElement("span");
+        dateSpan.classList.add("date");
+        dateSpan.textContent = date;
+        footer.appendChild(dateSpan);
+        var paragraph = document.createElement("p");
+        paragraph.classList.add("m-b-5", "m-t-10");
+        paragraph.textContent = comment;
+
+        // Thêm các phần tử vào div chính
+        textDiv.appendChild(heading);
+        textDiv.appendChild(footer);
+        textDiv.appendChild(paragraph);
+
+        commentDiv.appendChild(imageDiv);
+        commentDiv.appendChild(textDiv);
+
+        if (target == "TrungDzai") {
+            var targetDiv = document.getElementById(target);
+            targetDiv.appendChild(commentDiv);
+            scrollToBottom()
+        }
+        else {
+            var commentChildDiv = document.createElement("div");
+            commentChildDiv.classList.add("commentContaier__child");
+            commentChildDiv.appendChild(commentDiv)
+            var targetDiv = document.getElementById(target + "c");
+            console.log(targetDiv)
+            console.log(targetDiv.children.length)
+            if (targetDiv.children.length == 1) {
+                targetDiv.insertBefore(commentChildDiv, targetDiv.firstChild);
+            }
+            else {
+                targetDiv.insertBefore(commentChildDiv, targetDiv.children[targetDiv.children.length - 2].nextSibling);
+            }
+        }
+    }
+
+
+    var first = document.getElementsByClassName("far fa-heart")
+    var second = document.getElementsByClassName("fas fa-heart")
+    var liked = document.getElementsByClassName("liked")
+
+    var gradientContent = document.getElementsByClassName('content__main-gradient')[0]
+
+    var elementDesc = document.querySelector('.content__main-desc');
+
+    var elementBackgroundgradient = document.querySelector('.content__main-gradient');
+
+    var specificHeight = 450;
+
+    function scrollToBottom() {
+        // Lấy chiều cao của toàn bộ trang
+        var scrollHeight = document.body.scrollHeight;
+
+        // Thực hiện cuộn mượt đến đỉnh trang
+        window.scrollTo({
+            top: scrollHeight,
+            behavior: 'smooth'
+        });
+    }
+
+
+    function activeContentMain() {
+        elementDesc.classList.add('content__main-active');
+        elementBackgroundgradient.classList.add('dp-n');
+    }
+
+    socket.on("ppp", (stt, index, content) => {
+        if (stt == 1) {
+            console.log(index)
+            first[index].classList.toggle("frist")
+            second[index].classList.toggle("frist")
+            likeEffect.classList.toggle("lliked")
+            liked[index].innerHTML = parseInt(liked[index].innerHTML) + 1
+        }
+        if (stt == 0) {
+            console.log(index)
+            first[index].classList.toggle("frist")
+            second[index].classList.toggle("frist")
+            likeEffect.classList.toggle("lliked")
+            liked[index].innerHTML = parseInt(liked[index].innerHTML) - 1
+        }
+        if (stt == -1) {
+            createToast("Thất bại!", content, 0)
+        }
+        if (stt == 2) {
+            createToast("Thành công!", content, 1)
+        }
+    })
+
+    function createToast(text1, text2, status) {
+        var toast = document.getElementsByClassName("toast")[0]
+        var IconClose = document.getElementsByClassName("close")[0]
+        var textOne = document.getElementById("text-1")
+        var textTwo = document.getElementById("text-2")
+        var iconToast = document.getElementById("iconToast")
+        var progress = document.getElementById("progress")
+
+        textOne.innerText = text1
+        textTwo.innerText = text2
+
+        iconToast.classList = [];
+
+        (status === 1) ? iconToast.classList.add('fas', 'fa-check-circle', 'success') : iconToast.classList.add('fas', 'fa-exclamation-triangle', 'check')
+
+        var beforeProgress = window.getComputedStyle(progress, '::before');
+
+        try {
+            var styleProgress = document.styleSheets[6].cssRules[60]
+            styleProgress.style.backgroundColor = (status === 1) ? "#00ff00" : "#ff2626"
+        }
+        catch {
+
+        }
+
+        IconClose.addEventListener("click", () => {
+            toast.classList.remove("active");
+
+            setTimeout(() => {
+                progress.classList.remove("active");
+            }, 300);
+
+            clearTimeout(timer1);
+            clearTimeout(timer2);
+        });
+
+        activeEffect(toast, progress)
+    }
+
+    function activeEffect(toast, progress) {
+        toast.classList.add("active");
+        progress.classList.add("active");
+
+        var timer1 = setTimeout(() => {
+            toast.classList.remove("active");
+        }, 5000);
+
+        var timer2 = setTimeout(() => {
+            progress.classList.remove("active");
+        }, 5300);
+    }
+
+    function copyText(id) {
+        var textToCopy = document.getElementById(id);
+        var originalText = textToCopy.innerText;
+        var newText = window.location.href + originalText;
+        var tempTextArea = document.createElement("textarea");
+        tempTextArea.value = newText;
+        document.body.appendChild(tempTextArea);
+        tempTextArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempTextArea);
+
+        createToast("Thành công!", "Đã sao chép liên kết bài viết này", 1)
+    }
+
+    var submitComment = document.getElementById("submitComment")
+    var comment__individual = document.getElementsByClassName("comment__individual")[0]
+    submitComment.addEventListener("click", (event) => {
+        const commentValue = comment__individual.value
+        socket.emit("commentAssignment", commentValue, `{{user.username}}`, `{{assignment._id}}`, "")
+        comment__individual.value = ""
+    })
+
+    socket.on("commentSocket", (cmt, au, date, target) => {
+        addCommentToDiv(au, cmt, date, "https://i.imgur.com/uIgDDDd.jpg", target)
+
+    })
+
+    var confirmDiv = document.getElementsByClassName('confirm')[0];
+    var confirmBlock = document.getElementsByClassName('confirm__block')[0];
+    confirmBlock.addEventListener("click", () => {
+        confirmBlock.classList.toggle("dp-n")
+        submitButton.style.top = "-150%"
+    })
+
+
+    var accept = document.getElementsByClassName('confirm__accept')[0];
+    var reject = document.getElementsByClassName('confirm__reject')[0];
+
+    accept.addEventListener('click', function () {
+        confirmBlock.classList.add('dp-n');
+        confirmDiv.classList.add('dp-n');
+        const targetDivId = accept.getAttribute("data-id") + "t"
+        var elementDiv = document.getElementById(targetDivId)
+        elementDiv.parentNode.removeChild(elementDiv)
+        socket.emit("deleteCommentAssignment", `{{assignment._id}}`, accept.getAttribute("data-id"))
+    })
+
+    reject.addEventListener('click', function () {
+        confirmBlock.classList.add('dp-n');
+        confirmDiv.classList.add('dp-n');
+    })
+
+    var buttonDelete = document.getElementsByClassName("buttonDelete")
+    for (let i = 0; i < buttonDelete.length; i++) {
+        buttonDelete[i].addEventListener("click", () => {
+            accept.setAttribute("data-id", buttonDelete[i].id)
+            confirmDiv.classList.remove("dp-n")
+            confirmBlock.classList.remove("dp-n")
+        })
+    }
+
+    socket.on("resultReactComment", (index, stt) => {
+        console.log(index, stt)
+        if (stt == 1) {
+            scoreComment[index].innerText = parseInt(scoreComment[index].innerText) + 1
+            scoreComment[index].style.color = "#ef5350"
+            iconSecond[index].classList.add("frist")
+            iconFrist[index].classList.remove("frist")
+
+        }
+        else {
+            scoreComment[index].innerText = parseInt(scoreComment[index].innerText) - 1
+            scoreComment[index].style.color = "#b0b0b0"
+            iconSecond[index].classList.remove("frist")
+            iconFrist[index].classList.add("frist")
+
+        }
+    })
+    var submitButton = document.getElementsByClassName("submit")[0]
+    var submitTimes = document.getElementsByClassName("submit__times")[0]
+    submitTimes.addEventListener("click", () => {
+        confirmBlock.classList.toggle("dp-n")
+        submitButton.style.top = "-150%"
+    })
+    var submitContent = document.getElementById("submitContent")
+    submitContent.addEventListener("click", () => {
+        confirmBlock.classList.toggle("dp-n")
+        submitButton.style.top = "50%"
+    })
+
+    var ContentEffect = document.getElementsByClassName("content")
+    var SubmitButton = document.getElementsByClassName("button_submit")
+    var ImageInput = document.getElementsByClassName("submitImage")
+    var ListImage = document.getElementsByClassName("imageCheckOnchange")
+    var labelImage = document.getElementsByClassName("file-label")
+    for (let index = 0; index < ContentEffect.length; index++) {
+        ContentEffect[index].addEventListener("click", () => {
+            ContentEffect[index].classList.toggle("content_effect")
+            SubmitButton[index].classList.toggle("button_effect")
+            ImageInput[index].classList.toggle("ImageInput_effect")
+        })
+    }
+    for (let index = 0; index < SubmitButton.length; index++) {
+        SubmitButton[index].addEventListener("click", (e) => {
+
+            e.stopPropagation()
+        })
+    }
+    for (let index = 0; index < ListImage.length; index++) {
+        ListImage[index].addEventListener("click", (e) => {
+
+            e.stopPropagation()
+        })
+        ListImage[index].addEventListener("change", (e) => {
+            labelImage[index].innerHTML = `Hoàn tất <i class="fas fa-check-circle" style="color: #000000;"></i>`
+            labelImage[index].style.backgroundColor = "#90EE90"
+        })
+    }
+
+    var buttonSubmitSolution = document.getElementById("buttonSubmitSolution")
+    buttonSubmitSolution.addEventListener("click", (e) => {
+        for (let i = 0; i < labelImage.length; i++) {
+            if (labelImage[i].style.backgroundColor == "rgb(144, 238, 144)") {
+                const userName = "{{user.username}}"
+                if (userName) {
+                    buttonSubmitSolution.submit()
+                    return;
+                }
+                else {
+                    createToast("Thất bại!", "Bạn cần đăng nhập để đăng lời giải", 0)
+                    e.preventDefault()
+                    return;
+                }
+            }
+        }
+        e.preventDefault()
+        createToast("Thất bại!", "Bạn chưa nộp bất kỳ lời giải nào", 0)
+    })
+
+</script>

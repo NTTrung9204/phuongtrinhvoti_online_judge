@@ -1,0 +1,297 @@
+<link rel="stylesheet" href="css/contest.css">
+<section id="sectionBackground">
+    <div class="background">
+        <div class="list">
+            <div class="list__item">
+                <i class="fas fa-chevron-down list__item-hidden">
+                    <span style="font-family: 'Roboto';">
+                        Kỳ thi sắp đến
+                    </span></i>
+                <div class="ContestDiv">
+                {{#each CommingContest}}
+                <table class="table-list">
+                    <tr class="row">
+                        <th class="exam">Kỳ thi</th>
+                        <th class="number">Số câu</th>
+                    </tr>
+                    <tr class="row">
+                        <td class="exam">
+                            <p class="exam__name">{{this.name}}</p>
+                            <p class="exam__time-end">
+                                Thời gian làm bài
+                                <span class="countdown-time__title">{{this.timeTotal}}</span>
+                            </p>
+                            <p class="exam__time">Bắt đầu lúc {{this.timeStart}}</p>
+                        </td>
+                        <td class="number">{{this.AmountQuest}}</td>
+                    </tr>
+                </table>
+                <div id="{{this._id}}" class="confirm dp-n">
+                    <div class="confirm__top" style="padding: 10px">Thông báo</div>
+                    <p class="confirm__title">Xác Nhận Tham Gia</p>
+                    <div style="position: absolute; bottom: 20px; right: 30px">
+                        <a style="text-decoration: none;" href="/contest/{{this._id}}">
+                            <button class="confirm__accept" type="button">Đồng ý</button>
+                        </a>
+                        <button onclick="hidediv('{{this._id}}')" class="confirm__reject" type="button">Hủy</button>
+                    </div>
+                </div>
+                {{/each}}
+                </div>
+            </div>
+            <div class="list__item">
+                <i class="fas fa-chevron-down list__item-hidden">
+                    <span style="font-family: 'Roboto';">
+                        Kỳ thi đang diễn ra
+                    </span></i>
+                <div class="ContestDiv">
+                {{#each CurrentContest}}
+                <table class="table-list">
+                    <tr class="row">
+                        <th class="exam">Kỳ thi</th>
+                        <th class="number">Người tham gia</th>
+                        <th class="join"></th>
+                    </tr>
+                    <tr class="row">
+                        <td class="exam">
+                            <p class="exam__name">{{this.name}}{{#if this.password}}<i class="fas fa-lock"></i>{{/if}}</p>
+                            <p class="exam__time-end">
+                                Kết thúc trong
+                                <span class="countdown-time__title count">{{this.duration}}</span>
+                            </p>
+                            <p class="exam__time">{{this.date}}</p>
+                        </td>
+                        <td class="number">{{this.AmountAttendee}}</td>
+                        <td class="join">
+                            <button onclick="hidediv('{{this._id}}')" class="join__btn" type="button">Tham
+                                gia</button>
+                        </td>
+                    </tr>
+                </table>
+                <div {{#if this.password}} {{else}}style="height: 200px"{{/if}} id="{{this._id}}" class="confirm dp-n">
+                    <div class="confirm__top" style="padding: 10px">Thông báo</div>
+                    <p style="margin-bottom: 20px; font-weight: 700" class="confirm__title">Xác nhận tham gia cuộc thi</p>
+                    {{#if this.password}}
+                        <label style="font-weight: 700;" for="password">Mật khẩu:</label>
+                        <input style="width: 100%; margin: 20px 0; padding-left: 15px; height: 30px; border-radius: 5px" id="password" name="password" type="password">
+                    {{/if}}
+                    <div style="position: absolute; bottom: 20px; right: 30px">
+                        <a id="checkDirect" style="text-decoration: none;" href="/contest/{{this._id}}">
+                            <button class="confirm__accept" type="button">Đồng ý</button>
+                        </a>
+                        <button onclick="hidediv('{{this._id}}')" class="confirm__reject" type="button">Hủy</button>
+                    </div>
+                </div>
+                {{/each}}
+                </div>
+            </div>
+            <div class="list__item">
+                <i class="fas fa-chevron-down list__item-hidden fa-chevron-right">
+                    <span style="font-family: 'Roboto';">
+                        Kỳ thi đã diễn ra ({{lengthOldContest}})
+                    </span>
+                </i>
+                <div class="ContestDiv dp-n">
+                {{#each OldContest}}
+                <table class="table-list">
+                    <tr class="row">
+                        <th class="exam">Kỳ thi</th>
+                        <th class="number">Người tham gia</th>
+                        <th class="join"></th>
+                    </tr>
+                    <tr class="row">
+                        <td class="exam">
+                            <p class="exam__name">{{this.name}}</p>
+                            <p class="exam__time-end">
+                                Đã kết thúc
+                            </p>
+                            <p class="exam__time">{{this.date}}</p>
+                        </td>
+                        <td class="number">{{this.AmountAttendee}}</td>
+                        <td class="join">
+                            <button onclick="hidediv('{{this._id}}')" class="join__btn" type="button">Xem cuộc
+                                thi</button>
+                        </td>
+                    </tr>
+                </table>
+                <div style="height: 200px !important;" id="{{this._id}}" class="confirm dp-n">
+                    <div class="confirm__top" style="padding: 10px">Thông báo</div>
+                    <p class="confirm__title">Cuộc thi này đã kết thúc, bạn có muốn xem kết quả?</p>
+                    <div style="position: absolute; bottom: 20px; right: 30px;">
+                        <a style="text-decoration: none;" href="/contest/{{this._id}}">
+                            <button class="confirm__accept" type="button">Đồng ý</button>
+                        </a>
+                        <button onclick="hidediv('{{this._id}}')" class="confirm__reject" type="button">Hủy</button>
+                    </div>
+                </div>
+                {{/each}}
+                </div>
+            </div>
+        </div>
+            <div class="confirm__block dp-n"></div>
+    </div>
+            {{!-- <p style="display: none;" class="top__information-time top__information-hover count-end"></p> --}}
+</section>
+<div class="toast">
+
+    <div class="toast-content">
+        <i id="iconToast" class="fas fa-exclamation-triangle check"></i>
+
+        <div class="message">
+            <span id="text-1" class="text text-1">Thất bại!</span>
+            <span id="text-2" class="text text-2">Bạn cần đăng nhập để làm thao tác này</span>
+        </div>
+    </div>
+    <i class="far fa-times-circle close" style="color: #000000;"></i>
+
+    <div id="progress" class="progress"></div>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var Count = document.querySelector('.count');
+
+
+    var elementListitem = document.getElementsByClassName('fas');
+
+    var elementTable = document.getElementsByClassName('table');
+
+    for (let i = 0; i < elementListitem.length; i++) {
+        elementListitem[i].addEventListener('click', function () {
+            elementTable[i].classList.toggle('dp-n');
+        })
+    }
+    var listItemhidden = document.getElementsByClassName('list__item-hidden');
+    var ContestDiv = document.getElementsByClassName('ContestDiv');
+
+    for (let i = 0; i < listItemhidden.length; i++) {
+        listItemhidden[i].addEventListener('click', function () {
+            ContestDiv[i].classList.toggle('dp-n');
+            elementListitem[i].classList.toggle('fa-chevron-right')
+        })
+    }
+
+    var clickBtnjoin = document.getElementsByClassName('join__btn');
+    var confirmDiv = document.getElementsByClassName('confirm');
+    var confirmBlock = document.querySelector('.confirm__block');
+    var background = document.querySelector('.background');
+    var bodyMain = document.querySelector('.body-main');
+    var sectionBackground = document.getElementById('sectionBackground');
+
+    for (let i = 0; i < clickBtnjoin.length; i++) {
+        clickBtnjoin[i].addEventListener('click', function () {
+            //sectionBackground.style.backgroundColor = "rgba(0, 0, 0, 0.2)"
+            confirmBlock.classList.remove('dp-n');
+        })
+    }
+
+    var accept = document.querySelector('.confirm__accept');
+    var reject = document.querySelector('.confirm__reject');
+
+    accept.addEventListener('click', function () {
+        confirmBlock.classList.add('dp-n');
+        background.classList.add('dp-n');
+        bodyMain.classList.remove('dp-n');
+    })
+
+    reject.addEventListener('click', function () {
+        confirmBlock.classList.add('dp-n');
+    })
+
+    function hidediv(divId) {
+        var div = document.getElementById(divId);
+        div.classList.toggle('dp-n');
+        confirmBlock.classList.add('dp-n');
+    }
+
+    var socket = io();
+    socket.emit('connection', socket.id);
+
+    socket.on('time', (StringTime, PercentTime) => {
+        Count.innerHTML = StringTime
+    })
+
+    const searchParams = new URLSearchParams(window.location.search);
+
+    if(searchParams.has('status')){
+        setTimeout(()=>{
+            const statusContestUser = searchParams.get('status')
+            if(statusContestUser == 1){
+                createToast('Thất bại', 'Bạn cần đăng nhập để vào cuộc thi này!', 0)
+            }
+            if(statusContestUser == 0){
+                createToast('Thất bại', 'Bạn đã bị đình chỉ thi đấu do vi phạm!', 0)
+            }
+            if(statusContestUser == 2){
+                createToast('Thất bại', 'Mật khẩu tham gia cuộc thi không đúng!', 0)
+            }
+        }, 300)
+    }
+
+    function createToast(text1, text2, status) {
+        var toast = document.getElementsByClassName("toast")[0]
+        var IconClose = document.getElementsByClassName("close")[0]
+        var textOne = document.getElementById("text-1")
+        var textTwo = document.getElementById("text-2")
+        var iconToast = document.getElementById("iconToast")
+        var progress = document.getElementById("progress")
+
+        textOne.innerText = text1
+        textTwo.innerText = text2
+
+        iconToast.classList = [];
+
+        (status === 1) ? iconToast.classList.add('fas', 'fa-check-circle', 'success') : iconToast.classList.add('fas', 'fa-exclamation-triangle', 'check')
+
+        var beforeProgress = window.getComputedStyle(progress, '::before');
+
+        try {
+            var styleProgress = document.styleSheets[6].cssRules[60]
+            styleProgress.style.backgroundColor = (status === 1) ? "#00ff00" : "#ff2626"
+        }
+        catch {
+
+        }
+
+        IconClose.addEventListener("click", () => {
+            toast.classList.remove("active");
+
+            setTimeout(() => {
+                progress.classList.remove("active");
+            }, 300);
+
+            clearTimeout(timer1);
+            clearTimeout(timer2);
+        });
+
+        activeEffect(toast, progress)
+    }
+
+    function activeEffect(toast, progress) {
+        toast.classList.add("active");
+        progress.classList.add("active");
+
+        var timer1 = setTimeout(() => {
+            toast.classList.remove("active");
+        }, 5000);
+
+        var timer2 = setTimeout(() => {
+            progress.classList.remove("active");
+        }, 5300);
+    }
+
+    var checkDirect = document.getElementById("checkDirect")
+    var password = document.getElementById("password")
+
+    if(password){
+        checkDirect.addEventListener("click", (e) => {
+            e.preventDefault()
+            const inputTag = password.value;
+            let directLink = checkDirect.getAttribute("href") + '?password=' + inputTag
+            window.location = directLink
+        })
+    }
+
+
+
+
+</script>

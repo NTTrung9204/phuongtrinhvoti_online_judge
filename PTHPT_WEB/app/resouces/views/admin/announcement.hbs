@@ -1,0 +1,27 @@
+<link rel="stylesheet" href="./../../../../css/admin.css">
+<link rel="stylesheet" href="../../../css/member.css">
+<div class="result">
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    <a class="createAnnouncement" href="/admin/announcement/create">Tạo</a>
+                    STT
+                </th>
+                <th>Thông báo</th>
+                <th>Thời gian</th>
+                <th>Chỉnh sửa</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each Announcement}}
+            <tr>
+                <td>{{PlusOne @index}}</td>
+                <td>{{this.title}}</td>
+                <td>{{this.date}}</td>
+                <td><a href="announcement/{{this._id}}/detail">Chỉnh sửa</a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

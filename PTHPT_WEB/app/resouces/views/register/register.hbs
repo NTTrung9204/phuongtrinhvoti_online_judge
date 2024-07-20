@@ -1,0 +1,42 @@
+<link rel="stylesheet" href="css/register.css">
+<div class="container">
+    <form action="" method="post" class="form-register">
+        <h1 style="font-size: 25px;">Đăng Ký</h1>
+        <p id="error-username">{{errorusername}}</p>
+        <div class="form-group">
+            <label for="username" class="form-label">Tài Khoản</label>
+            <input type="text" class="form-input" id="username" name="username" required>
+        </div>
+        <p id="error-email">{{erroremail}}</p>
+        <div class="form-group">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-input" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="password" class="form-label">Mật Khẩu</label>
+            <input type="password" class="form-input" id="password" name="password" required>
+        </div>
+        <p id="error-password">{{errorpassword}}</p>
+        <div class="form-group">
+            <label for="enterthepassword" class="form-label">Nhập Lại Mật Khẩu</label>
+            <input type="password" class="form-input" id="enterthepassword" name="enterthepassword" required
+                onkeyup="CheckPassword()">
+        </div>
+        <div class="form-submit">
+            <input type="submit" value="Xác Nhận" class="form-input-submit">
+        </div>
+    </form>
+</div>
+
+<script>
+    function CheckPassword() {
+        var password = document.getElementById("password").value;
+        var enterthepassword = document.getElementById("enterthepassword").value;
+        if (password != enterthepassword) {
+            document.getElementById("error-password").innerHTML = "Mật Khẩu Không Khớp";
+        }
+        else {
+            document.getElementById("error-password").innerHTML = " ";
+        }
+    }
+</script>

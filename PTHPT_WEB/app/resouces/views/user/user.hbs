@@ -1,0 +1,365 @@
+<link rel="stylesheet" href="../../../css/user.css">
+<link rel="stylesheet" href="../../css/announcement.css">
+<div class="information">
+    <div class="infor__header">
+        <div class="infor__header__card">
+            {{#condition User.username user.username}}
+            <i class="far fa-edit iconEditHeaderCard"></i>
+            {{/condition}}
+            <div class="infor__item">
+                <img src="../img/{{User.avatar}}" alt="" class="infor__image">
+                <div class="infor__container">
+                    <span style="color: {{User.color}}; font-weight: {{User.fontWeight}}" class="infor__name">{{User.username}}</span>
+                    <span style="color: #000000;" class="infor__describe">{{User.career}}</span>
+                    <div style="text-align: center; line-height: 22px; font-size: 18px;">
+                        {{{User.bio}}}
+                    </div>
+                    <button onclick="Contact()" class="infor__contact">Liên hệ</button>
+                </div>
+            </div>
+        </div>
+        <div class="infor__header__achieve">
+            <div class="infor__header__sign"><i class="fas fa-info-circle" style="margin-right: 10px;"></i>Thông tin và
+                các thành tích đạt được</div>
+            <div class="infor__header__list">
+                <ul class="infor__list__achieve">
+                    <li class="infor__achieve__items">Điểm số<span>{{User.score}}</span></li>
+                    <li class="infor__achieve__items">Bài tập<span>{{User.assignment}}</span></li>
+                    <li class="infor__achieve__items">Xếp hạng<span>{{User.rank}}</span></li>
+                    <li class="infor__achieve__items">Kỳ thi<span>{{User.contest}}</span></li>
+                    <li class="infor__achieve__items">Trình độ<span>{{User.position}}</span></li>
+                </ul>
+            </div>
+            <div class="infor__list__awards">
+                {{#if isEmptyMedal}}
+                    <p style="text-align: center; font-weight:700; padding:30px 0; margin-top: 10px">Hiện chưa đạt được huy chương nào</p>
+                {{else}}
+                    <ul class="infor__awards">
+                        {{#each User.goldenMedal}}
+                        <a href="/contest/{{this}}">
+                            <img src="../img/gold-medal.png" alt="" class="infor__awards__items">
+                        </a>
+                        {{/each}}
+                        {{#each User.silverMedal}}
+                        <a href="/contest/{{this}}">
+                            <img src="../img/silver-medal.png" alt="" class= "infor__awards__items">
+                        </a>
+                        {{/each}}
+                        {{#each User.bronzeMedal}}
+                        <a href="/contest/{{this}}">
+                            <img src="../img/bronze-medal.png" alt="" class="infor__awards__items">
+                        </a>
+                        {{/each}}
+                    </ul>
+                {{/if}}
+            </div>
+            <div class="infor__history">
+                <a style="color: #000000;" href="/user/{{User._id}}/submission/0" class="infor__history__submit">Các bài nộp</a>
+                
+                {{#if followed}}
+                    <div style="background-color: #76ee76;" class="infor__follow">Đang theo dõi</div>
+                {{else}}
+                    <div class="infor__follow">Theo dõi</div>
+                {{/if}}
+                <div class="infor__follower">Người theo dõi : {{User.follower}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="infor__blog">
+        {{#condition User.username user.username}}
+        <i class="far fa-edit iconEditHeaderCard"></i>
+        {{/condition}}
+        <div class="infor__header__sign"><i class="fas fa-pen-nib" style="margin-right: 10px;"></i>Bài viết</div>
+        {{#if isEmptyDesc}}
+            <p style="text-align: center; font-weight:700; padding:30px 0; margin-top: 10px">Hiện chưa có bài viết nào, hãy chia sẻ điều gì đó</p>
+        {{else}}
+            <div class="infor__blog__description">
+                <div class="infor__blog__des">
+                    {{User.descriptionA}}
+                </div>
+                <div class="infor__blog__image">
+                    <img src="../img/{{User.imageDescription}}" alt="" class="infor__blog__image__item">
+                </div>
+                <div class="infor__blog__des">
+                    {{User.descriptionB}}
+                </div>
+            </div>
+        {{/if}}
+    </div>
+
+    <div class="infor__blog">
+        {{#condition User.username user.username}}
+        <i class="far fa-edit iconEditHeaderCard"></i>
+        {{/condition}}
+        <div class="infor__header__sign"><i class="fas fa-id-card" style="margin-right: 10px;"></i>Thông tin liên hệ
+        </div>
+        {{#if isEmptyContact}}
+            <p style="text-align: center; font-weight:700; padding:30px 0; margin-top: 10px">Hiện chưa có thông tin liên hệ nào</p>
+        {{else}}
+            <ul class="social-icons">
+                {{#if User.messenger}}
+                <li><a target="_blank" href="{{User.messenger}}"><i class="fab fa-facebook-messenger"></i></a></li>
+                {{/if}}
+                {{#if User.discord}}
+                <li><a target="_blank" href="{{User.discord}}"><i class="fab fa-discord"></i></a></li>
+                {{/if}}
+                {{#if User.youtube}}
+                <li><a target="_blank" href="{{User.youtube}}"><i class="fab fa-youtube"></i></a></li>
+                {{/if}}
+                {{#if User.mail}}
+                <li><a target="_blank" href="mailto:{{User.mail}}"><i class="fas fa-inbox"></i></a></li>
+                {{/if}}
+                {{#if User.github}}
+                <li><a target="_blank" href="{{User.github}}"><i class="fab fa-github"></i></a></li>
+                {{/if}}
+            </ul>
+        {{/if}}
+    </div>
+</div>
+
+
+
+{{#condition User.username user.username}}
+    <div class="submitHeaderCard">
+        <i class="submit__times fas fa-times"></i>
+        <form method="post" enctype="multipart/form-data" id="submitAvatar">
+            <textarea name="career" type="text" class="submit__text" placeholder="Mô tả ngắn..."
+                style="margin-top: 30px;">{{../User.career}}</textarea>
+            <label for="fileInput" class="custom-file-input">
+                <input name="myAvatar" class="imageCheckOnchange" type="file" id="fileInput" accept="image/*">
+                <span class="file-label">Chọn avatar</span>
+            </label>
+            <textarea name="bio" type="text" class="submit__text" placeholder="Viết tiểu sử...">{{../User.bio}}</textarea>
+            <button id="buttonSubmitSolution" class="submitSolution" form="submitAvatar">Cập nhật</button>
+        </form>
+    </div>
+    <div class="submitHeaderCard">
+        <i class="submit__times fas fa-times"></i>
+        <form method="post" enctype="multipart/form-data" id="submitDescription">
+            <textarea name="descriptionA" type="text" class="submit__text" placeholder="Viết gì đó..."
+                style="margin-top: 30px;">{{../User.descriptionA}}</textarea>
+            <label for="imageDes" class="custom-file-input">
+                <input name="myShare" class="imageCheckOnchange" type="file" id="imageDes" accept="image/*">
+                <span class="file-label">Chọn ảnh chia sẻ</span>
+            </label>
+            <textarea name="descriptionB" type="text" class="submit__text"
+                placeholder="Viết gì đó...">{{../User.descriptionB}}</textarea>
+            <button id="buttonSubmitSolution" class="submitSolution" form="submitDescription">Cập nhật</button>
+        </form>
+    </div>
+    <div style="margin-top: 0;" class="bodyDetail">
+        <form id="formContact" method="POST">
+
+            <div class="input-container">
+                <i class="submit__times fas fa-times"></i>
+                <label for="nameType">Messenger</label>
+                <input value="{{../User.messenger}}" type="text" id="nameType" name="messenger">
+
+                <label for="Type">Discord</label>
+                <input value="{{../User.discord}}" type="text" id="Type" name="discord">
+
+                <label for="nameType">Youtube</label>
+                <input value="{{../User.youtube}}" type="text" id="nameType" name="youtube">
+
+                <label for="Type">Gmail</label>
+                <input value="{{../User.mail}}" type="text" id="Type" name="mail">
+
+                <label for="nameType">Github</label>
+                <input value="{{../User.github}}" type="text" id="nameType" name="github">
+
+                <button id="submitContact" type="submit">Lưu</button>
+            </div>
+        </form>
+    </div>
+        
+    <div class="confirm__block dp-n" style="
+                    width: 100%;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    padding: 250px;
+                    z-index: 1;
+                    height: 100%;
+                    background-color: rgba(0, 0, 0, 0.2);
+                ">
+    </div>
+{{/condition}}
+
+<div class="toast">
+
+    <div class="toast-content">
+        <i id="iconToast" class="fas fa-exclamation-triangle check"></i>
+
+        <div class="message">
+            <span id="text-1" class="text text-1">Thất bại!</span>
+            <span id="text-2" class="text text-2">Bạn cần đăng nhập để làm thao tác này</span>
+        </div>
+    </div>
+    <i class="far fa-times-circle close" style="color: #000000;"></i>
+
+    <div id="progress" class="progress"></div>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io();
+
+    var iconEditHeaderCard = document.getElementsByClassName("iconEditHeaderCard")[0]
+    var submitButton = document.getElementsByClassName("submitHeaderCard")[0]
+    var submitTimes = document.getElementsByClassName("submit__times")[0]
+    var confirmBlock = document.getElementsByClassName("confirm__block")[0]
+
+    if(submitTimes){
+        submitTimes.addEventListener("click", () => {
+            confirmBlock.classList.toggle("dp-n")
+            submitButton.style.top = "-150%"
+        })
+
+        iconEditHeaderCard.addEventListener("click", () => {
+            confirmBlock.classList.toggle("dp-n")
+            submitButton.style.top = "50%"
+        })
+    }
+
+    var ListImageAvar = document.getElementsByClassName("imageCheckOnchange")[0]
+    var labelImageAva = document.getElementsByClassName("file-label")[0]
+
+    if(ListImageAvar){
+        ListImageAvar.addEventListener("change", (e) => {
+            labelImageAva.innerHTML = `Hoàn tất <i class="fas fa-check-circle" style="color: #000000;"></i>`
+            labelImageAva.style.backgroundColor = "#90EE90"
+        })
+    }
+
+    //////////////////////////////////////////////////////////////
+
+    var iconEditDescription = document.getElementsByClassName("iconEditHeaderCard")[1]
+    var submitButtonDescription = document.getElementsByClassName("submitHeaderCard")[1]
+    var submitTimesDescription = document.getElementsByClassName("submit__times")[1]
+    var confirmBlock = document.getElementsByClassName("confirm__block")[0]
+
+    if(submitTimesDescription){
+        submitTimesDescription.addEventListener("click", () => {
+            confirmBlock.classList.toggle("dp-n")
+            submitButtonDescription.style.top = "-150%"
+        })
+        iconEditDescription.addEventListener("click", () => {
+            confirmBlock.classList.toggle("dp-n")
+            submitButtonDescription.style.top = "50%"
+        })
+    }
+
+
+    var ListImageDes = document.getElementsByClassName("imageCheckOnchange")[1]
+    var labelImageDes = document.getElementsByClassName("file-label")[1]
+
+    if(ListImageDes){
+        ListImageDes.addEventListener("change", (e) => {
+            labelImageDes.innerHTML = `Hoàn tất <i class="fas fa-check-circle" style="color: #000000;"></i>`
+            labelImageDes.style.backgroundColor = "#90EE90"
+        })
+    }
+
+    //////////////////////////////////////////
+
+    var iconEditContact = document.getElementsByClassName("iconEditHeaderCard")[2]
+    var bodyDetail = document.getElementsByClassName("bodyDetail")[0]
+    if(iconEditContact){
+        iconEditContact.addEventListener("click", () => {
+            bodyDetail.classList.toggle("bodyDetail__acctive")
+            confirmBlock.classList.toggle("dp-n")
+        })
+    }
+
+    var submitTimesContact = document.getElementsByClassName("submit__times")[2]
+    if(submitTimesContact){
+        submitTimesContact.addEventListener("click", () => {
+            confirmBlock.classList.toggle("dp-n")
+            bodyDetail.classList.toggle("bodyDetail__acctive")
+        })
+    }
+
+    function Contact() {
+        document.getElementsByClassName("fas fa-id-card")[0].scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+
+    }
+
+    var inforFollow = document.getElementsByClassName("infor__follow")[0]
+    inforFollow.addEventListener("click", () => {
+        console.log(123)
+        socket.emit("followUser", `{{user.username}}`, `{{User._id}}`)
+    })
+
+
+    var inforFollower = document.getElementsByClassName("infor__follower")[0]
+    socket.on("followUser", (STT, follower) => {
+        if (STT == 1) {
+            inforFollower.innerText = `Người theo dõi : ${follower}`
+            inforFollow.innerText = `Đang theo dõi`
+            inforFollow.style.backgroundColor = "#76ee76"
+        }
+        if(STT == -1){
+            inforFollower.innerText = `Người theo dõi : ${follower}`
+            inforFollow.innerText = `Theo dõi`
+            inforFollow.style.backgroundColor = "#fff"
+        }
+    })
+
+    socket.on("result", MESS =>{
+        createToast("Thất bại", MESS, -1)
+    })
+
+    function createToast(text1, text2, status) {
+        var toast = document.getElementsByClassName("toast")[0]
+        var IconClose = document.getElementsByClassName("close")[0]
+        var textOne = document.getElementById("text-1")
+        var textTwo = document.getElementById("text-2")
+        var iconToast = document.getElementById("iconToast")
+        var progress = document.getElementById("progress")
+
+        textOne.innerText = text1
+        textTwo.innerText = text2
+
+        iconToast.classList = [];
+
+        (status === 1) ? iconToast.classList.add('fas', 'fa-check-circle', 'success') : iconToast.classList.add('fas', 'fa-exclamation-triangle', 'check')
+
+        var beforeProgress = window.getComputedStyle(progress, '::before');
+
+        try {
+            var styleProgress = document.styleSheets[6].cssRules[60]
+            styleProgress.style.backgroundColor = (status === 1) ? "#00ff00" : "#ff2626"
+        }
+        catch {
+
+        }
+
+        IconClose.addEventListener("click", () => {
+            toast.classList.remove("active");
+
+            setTimeout(() => {
+                progress.classList.remove("active");
+            }, 300);
+
+            clearTimeout(timer1);
+            clearTimeout(timer2);
+        });
+
+        activeEffect(toast, progress)
+    }
+
+    function activeEffect(toast, progress) {
+        toast.classList.add("active");
+        progress.classList.add("active");
+
+        var timer1 = setTimeout(() => {
+            toast.classList.remove("active");
+        }, 5000);
+
+        var timer2 = setTimeout(() => {
+            progress.classList.remove("active");
+        }, 5300);
+    }
+
+
+</script>

@@ -1,0 +1,410 @@
+<link rel="stylesheet" href="../../css/assignment_show.css">
+<section class="body">
+    <div class="content">
+        <a href="/assignment/view/{{assignment._id}}" class="content__btn">Quay lại</a>
+        <div class="content__main">
+            <p class="content__main__title">{{assignment.title}} <i class="fas fa-minus-circle"></i></p>
+
+            <p class="content__main-topic">{{assignment.content}} <br>
+                {{{assignment.image}}}
+            </p>
+            <p class="content__main__author">Người đăng: {{assignment.author}}</p>
+            <p class="content__main-score">Điểm: {{assignment.score}}</p>
+            <p class="content__main__time">Ngày đăng: {{assignment.date}}</p>
+            <p class="content__main__source">Nguồn: {{assignment.resource}}</p>
+        </div>
+        {{#if isNull}}
+        <div style="text-align: center;" class="submit">Bài toán này hiện chưa có lời giải nào!</div>
+        {{else}}
+        {{#each assignment.solutions}}
+        <div class="">
+            <div class="submit">
+                {{#condition ../user.username this.author}}
+                <div data-id="{{../this._id}}" data-key="{{../this.key}}" class="buttonDelete">Xóa</div>
+                {{else}}
+                {{#condition ../../user.role "admin"}}
+                <div data-id="{{../this._id}}" data-key="{{../this.key}}" class="buttonDelete">Xóa</div>
+                {{/condition}}
+                {{/condition}}
+                <div style=" padding: 20px; display: inline-block; border-radius: 10px; position:relative">
+                    <img src="../../img/{{this.avatar}}" alt="" class="submit__avatar"
+                        style="float: left; margin-right: 10px;">
+                    {{#if this.isLike}}
+                    <span style="color: rgb(239, 83, 80);" class="scoreComment">{{this.likes}}</span>
+                    {{else}}
+                    <span class="scoreComment">{{this.likes}}</span>
+                    {{/if}}
+                    <h5 class="submit__author" style="float: left; margin-top: 10px; min-width:150px">
+
+                        <a style="color: {{this.color}};" href="/user/{{this.idAuthor}}">
+                            <span class="positionAuthor">{{this.position}} - {{this.score}}</span>
+                            {{!-- <span class="{{#condition this.role "admin"}}gradientColor
+                                {{/condition}}"> --}}
+                                <span style="font-weight: {{this.fontWeight}} !important;">{{this.author}}</span>
+
+                        </a>
+
+
+                        <span data-id="{{this._id}}" data-author="{{this.author}}" class="heart">
+                            {{#if this.isLike}}
+                            <i class="far fa-heart iconFrist"></i>
+                            <i class="fas fa-heart frist iconSecond"></i>
+                            {{else}}
+                            <i class="far fa-heart frist iconFrist"></i>
+                            <i class="fas fa-heart iconSecond"></i>
+                            {{/if}}
+                        </span>
+
+                    </h5>
+                    <p class="submit__author" style="display:block; color:#b0b0b0">{{this.date}}</p>
+                </div>
+                <p class="submit__text">{{this.descriptionA}}</p>
+                <div data-sol_id="{{this._id}}" data-id="{{this.key}}" class="submit__img-style"
+                    style="margin: 20px 0px; position: relative;">
+                    {{#if this.imageA}}
+                    <div class="submit__img-block">
+                        <img class="submit__img" data-author="{{this.author}}" src="/img/{{this.imageA}}" alt="">
+                    </div>
+                    {{/if}}
+                    {{#if this.imageB}}
+                    <div class="submit__img-block">
+                        <img class="submit__img" data-author="{{this.author}}" src="/img/{{this.imageB}}" alt="">
+                    </div>
+                    {{/if}}
+                    {{#if this.imageC}}
+                    <div class="submit__img-block">
+                        <img class="submit__img" data-author="{{this.author}}" src="/img/{{this.imageC}}" alt="">
+                    </div>
+                    {{/if}}
+                    <div class="overlay dp-n">
+                    </div>
+                    <img class="overlayImage" src="">
+                </div>
+                <p class="submit__text">{{this.descriptionB}}</p>
+            </div>
+        </div>
+        {{/each}}
+        {{/if}}
+    </div>
+</section>
+<div data-index="" id="confirmDelete" class="confirm dp-n">
+    <div class="confirm__top" style="padding: 10px">Thông báo</div>
+    <p class="confirm__title">Bạn có chắc chắn muốn xóa bình luận này?</p>
+    <div style="position: absolute; bottom: 20px; right: 30px">
+
+        <button data-id="" class="confirm__accept" type="button">Đồng
+            ý</button>
+        <button class="confirm__reject" type="button">Hủy</button>
+    </div>
+</div>
+<div class="confirm__block dp-n" style="
+                width: 100%;
+                position: fixed;
+                top: 0;
+                left: 0;
+                padding: 250px;
+                z-index: 1;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.2);
+            ">
+</div>
+<div class="toast">
+
+    <div class="toast-content">
+        <i id="iconToast" class="fas fa-exclamation-triangle check"></i>
+
+        <div class="message">
+            <span id="text-1" class="text text-1">Thất bại!</span>
+            <span id="text-2" class="text text-2">Bạn cần đăng nhập để làm thao tác này</span>
+        </div>
+    </div>
+    <i class="far fa-times-circle close" style="color: #000000;"></i>
+
+    <div id="progress" class="progress"></div>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io();
+    var submitImgstyle = document.getElementsByClassName('submit__img-style');
+
+    var overlayClick = document.getElementsByClassName('overlay');
+
+    var overlayImageClick = document.getElementsByClassName('overlayImage');
+
+    for (let i = 0; i < submitImgstyle.length; i++) {
+        let x = submitImgstyle[i].getElementsByClassName('submit__img');
+        for (let j = 0; j < x.length; j++) {
+            x[j].addEventListener('click', function (e) {
+                console.log(x, x[j], i, j)
+                let z = x[j].src;
+                console.log(z)
+                overlayClick[i].classList.remove('dp-n');
+                overlayImageClick[i].src = z;
+                console.log(overlayImageClick[i].src, i)
+                socket.emit("viewShowSolutions", submitImgstyle[i].getAttribute("data-sol_id"), submitImgstyle[i].getAttribute("data-id"), x[j].getAttribute("data-author"), i, '{{user.username}}')
+            });
+            overlayClick[i].addEventListener('click', function () {
+                overlayClick[i].classList.add('dp-n');
+                overlayImageClick[i].src = "";
+            })
+        }
+    }
+
+
+
+
+    var buttonReply = document.getElementsByClassName('comment__user-btn');
+
+    var elementReply = document.getElementsByClassName('comment__text-reply');
+
+    for (let i = 0; i < buttonReply.length; i++) {
+        buttonReply[i].addEventListener('click', () => {
+            console.log[i];
+            elementReply[i].style.display = "block";
+            buttonReply[i].style.display = "none";
+        })
+    }
+
+    var elementReplyall = document.getElementsByClassName('reply__all');
+
+    var elementReplysee = document.getElementsByClassName('comment__user-see');
+
+    var elementReplynosee = document.getElementsByClassName('comment__user-nosee');
+
+    for (let i = 0; i < elementReplysee.length; i++) {
+        var x = elementReplyall[i].getElementsByClassName('reply');
+        elementReplysee[i].innerHTML += "Xem (" + x.length + ") phản hồi";
+        elementReplynosee[i].innerHTML += "Thu hồi (" + x.length + ") phản hồi";
+    }
+
+    for (let i = 0; i < elementReplysee.length; i++) {
+        elementReplysee[i].addEventListener('click', function () {
+            elementReplysee[i].classList.toggle('dp-n');
+            elementReplynosee[i].classList.toggle('dp-n');
+            elementReplyall[i].classList.toggle('dp-n');
+        })
+
+        elementReplynosee[i].addEventListener('click', function () {
+            elementReplysee[i].classList.toggle('dp-n');
+            elementReplynosee[i].classList.toggle('dp-n');
+            elementReplyall[i].classList.toggle('dp-n');
+        })
+    }
+
+
+
+    var elementDots = document.getElementsByClassName('comment__user-dots');
+
+    var elementDotsclick = document.getElementsByClassName('comment__user-dots-click');
+
+    var elementDotsreply = document.getElementsByClassName('reply__user-dots');
+
+    var elementDotsreplyclick = document.getElementsByClassName('reply__user-dots-click');
+
+    var arrDots = [];
+
+    var arrDotsreply = [];
+
+    for (i = 0; i < elementDots.length; i++) {
+        arrDots.push(elementDots[i]);
+    }
+
+    for (i = 0; i < elementDotsreply.length; i++) {
+        arrDotsreply.push(elementDotsreply[i]);
+    }
+
+    for (let i = 0; i < elementDots.length; i++) {
+        elementDots[i].addEventListener('click', function () {
+            elementDotsclick[i].classList.toggle('dp-n');
+            for (let j = 0; j < elementDots.length; j++) {
+                if (j != i) {
+                    elementDotsclick[j].classList.add('dp-n');
+                }
+            }
+            for (let j = 0; j < elementDotsreply.length; j++) {
+                elementDotsreplyclick[j].classList.add('dp-n');
+            }
+        })
+    }
+
+    for (let i = 0; i < elementDotsreply.length; i++) {
+        elementDotsreply[i].addEventListener('click', function () {
+            elementDotsreplyclick[i].classList.toggle('dp-n');
+            for (let j = 0; j < elementDots.length; j++) {
+                elementDotsclick[j].classList.add('dp-n');
+            }
+            for (let j = 0; j < elementDotsreply.length; j++) {
+                if (j != i) {
+                    elementDotsreplyclick[j].classList.add('dp-n');
+                }
+            }
+        })
+    }
+
+    document.addEventListener('click', function (event) {
+        if (!arrDots.includes(event.target) && !arrDotsreply.includes(event.target)) {
+            for (let i = 0; i < elementDots.length; i++) {
+                elementDotsclick[i].classList.add('dp-n');
+            }
+            for (let i = 0; i < elementDotsreply.length; i++) {
+                elementDotsreplyclick[i].classList.add('dp-n');
+            }
+        }
+    })
+
+
+    var submitImgstyle = document.getElementsByClassName('submit__img-style');
+
+    var overlayClick = document.getElementsByClassName('overlay');
+
+    var overlayImageClick = document.getElementsByClassName('overlayImage');
+
+    for (let i = 0; i < submitImgstyle.length; i++) {
+        let x = submitImgstyle[i].getElementsByClassName('submit__img');
+        for (let j = 0; j < x.length; j++) {
+            x[j].addEventListener('click', function () {
+                var z = x[j].src;
+                overlayClick[i].classList.remove('dp-n');
+                overlayImageClick[i].src = z;
+                socket.emit("viewSolution", x[j].getAttribute("data-author"))
+            });
+            overlayClick[i].addEventListener('click', function () {
+                overlayClick[i].classList.add('dp-n');
+                overlayImageClick[i].src = "";
+            })
+        }
+    }
+
+    function createToast(text1, text2, status) {
+        var toast = document.getElementsByClassName("toast")[0]
+        var IconClose = document.getElementsByClassName("close")[0]
+        var textOne = document.getElementById("text-1")
+        var textTwo = document.getElementById("text-2")
+        var iconToast = document.getElementById("iconToast")
+        var progress = document.getElementById("progress")
+
+        textOne.innerText = text1
+        textTwo.innerText = text2
+
+        iconToast.classList = [];
+
+        (status === 1) ? iconToast.classList.add('fas', 'fa-check-circle', 'success') : iconToast.classList.add('fas', 'fa-exclamation-triangle', 'check')
+
+        var beforeProgress = window.getComputedStyle(progress, '::before');
+
+        try {
+            var styleProgress = document.styleSheets[6].cssRules[60]
+            styleProgress.style.backgroundColor = (status === 1) ? "#00ff00" : "#ff2626"
+        }
+        catch {
+
+        }
+
+        IconClose.addEventListener("click", () => {
+            toast.classList.remove("active");
+
+            setTimeout(() => {
+                progress.classList.remove("active");
+            }, 300);
+
+            clearTimeout(timer1);
+            clearTimeout(timer2);
+        });
+
+        activeEffect(toast, progress)
+    }
+
+    function activeEffect(toast, progress) {
+        toast.classList.add("active");
+        progress.classList.add("active");
+
+        var timer1 = setTimeout(() => {
+            toast.classList.remove("active");
+        }, 5000);
+
+        var timer2 = setTimeout(() => {
+            progress.classList.remove("active");
+        }, 5300);
+    }
+
+
+    var heartIcon = document.getElementsByClassName("heart")
+    var iconFrist = document.getElementsByClassName("iconFrist")
+    var iconSecond = document.getElementsByClassName("iconSecond")
+    var scoreComment = document.getElementsByClassName("scoreComment")
+    for (let i = 0; i < heartIcon.length; i++) {
+        heartIcon[i].addEventListener("click", () => {
+            socket.emit("reactCommentShowSolution", `{{user.username}}`, `{{assignment._id}}`, heartIcon[i].getAttribute("data-id"), i, heartIcon[i].getAttribute("data-author"))
+        })
+    }
+
+    var buttonDelete = document.getElementsByClassName("buttonDelete")
+    var confirmDiv = document.getElementsByClassName('confirm')[0];
+    var confirmBlock = document.getElementsByClassName('confirm__block')[0];
+    var accept = document.getElementsByClassName('confirm__accept')[0];
+    var reject = document.getElementsByClassName('confirm__reject')[0];
+
+    for (let i = 0; i < buttonDelete.length; i++) {
+        buttonDelete[i].addEventListener("click", (e) => {
+            confirmBlock.classList.toggle("dp-n")
+            confirmDiv.classList.toggle("dp-n")
+            confirmDiv.setAttribute("data-index", i)
+        })
+    }
+
+    reject.addEventListener("click", () => {
+        confirmBlock.classList.toggle("dp-n")
+        confirmDiv.classList.toggle("dp-n")
+    })
+
+    accept.addEventListener("click", (e) => {
+        confirmBlock.classList.toggle("dp-n")
+        confirmDiv.classList.toggle("dp-n")
+        let index = confirmDiv.getAttribute("data-index")
+        buttonDelete[index].parentElement.style.display = "none"
+        socket.emit("deleteSolution", buttonDelete[index].getAttribute("data-id"), buttonDelete[index].getAttribute("data-key"))
+
+    })
+
+    socket.on("resultReactCommentShowSolution", (index, stt) => {
+        if (stt == 1) {
+            scoreComment[index].innerText = parseInt(scoreComment[index].innerText) + 1
+            scoreComment[index].style.color = "#ef5350"
+            iconSecond[index].classList.add("frist")
+            iconFrist[index].classList.remove("frist")
+
+        }
+        else {
+            scoreComment[index].innerText = parseInt(scoreComment[index].innerText) - 1
+            scoreComment[index].style.color = "#b0b0b0"
+            iconSecond[index].classList.remove("frist")
+            iconFrist[index].classList.add("frist")
+
+        }
+    })
+
+    socket.on("ppp", (stt, index, content) => {
+        if (stt == 1) {
+            console.log(index)
+            first[index].classList.toggle("frist")
+            second[index].classList.toggle("frist")
+            likeEffect.classList.toggle("lliked")
+            liked[index].innerHTML = parseInt(liked[index].innerHTML) + 1
+        }
+        if (stt == 0) {
+            console.log(index)
+            first[index].classList.toggle("frist")
+            second[index].classList.toggle("frist")
+            likeEffect.classList.toggle("lliked")
+            liked[index].innerHTML = parseInt(liked[index].innerHTML) - 1
+        }
+        if (stt == -1) {
+            createToast("Thất bại!", content, 0)
+        }
+        if (stt == 2) {
+            createToast("Thành công!", content, 1)
+        }
+    })
+
+
+</script>

@@ -1,0 +1,46 @@
+<link rel="stylesheet" href="../../../css/admin.css">
+<link rel="stylesheet" href="../../../css/member.css">
+<div class="bodyDetail">
+    <form id="formUser" method="POST" action="./update">
+    
+    <div class="input-container">
+        <label for="username">Username:</label>
+        <input value="{{User.username}}" type="text" id="username" name="username">
+
+        <label for="password">Password:</label>
+        <input value="{{User.password}}" type="text" id="password" name="password">
+
+        <label for="email">Email:</label>
+        <input value="{{User.email}}" type="text" id="email" name="email">
+
+        <label for="role">Role:</label>
+        <input value="{{User.role}}" type="text" id="role" name="role">
+
+        <label for="deleted">Deleted:</label>
+        <input value="{{User.deleted}}" type="text" id="deleted" name="deleted">
+
+        {{!-- <label for="goldenMedal">goldenMedal:</label>
+        <input value="{{User.goldenMedal}}" type="text" id="goldenMedal" name="goldenMedal">
+
+        <label for="silverMedal">silverMedal:</label>
+        <input value="{{User.silverMedal}}" type="text" id="silverMedal" name="silverMedal">
+
+        <label for="bronzeMedal">bronzeMedal:</label>
+        <input value="{{User.bronzeMedal}}" type="text" id="bronzeMedal" name="bronzeMedal"> --}}
+
+        <label for="assignment">Assignment:</label>
+        <input value="{{User.assignment}}" type="text" id="assignment" name="assignment">
+
+        <label for="score">Score:</label>
+        <input value="{{User.score}}" type="text" id="score" name="score">
+
+        <label for="position">Position:</label>
+        <input value="{{User.position}}" type="text" id="position" name="position">
+
+        <label for="color">Color:</label>
+        <input value="{{User.color}}" type="text" id="color" name="color">
+
+        <button id="submitUser" type="submit">Lưu</button>
+    </div>
+    </form>
+</div>

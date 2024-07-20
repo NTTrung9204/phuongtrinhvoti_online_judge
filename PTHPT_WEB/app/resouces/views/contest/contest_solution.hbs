@@ -1,0 +1,105 @@
+<link rel="stylesheet" href="../../css/assignment_show.css">
+<link rel="stylesheet" href="../../css/Oldcontest.css">
+<section class="body">
+    <div class="content">
+        <a href="#" onclick="goBackWithoutSlash()" class="content__btn">Quay lại</a>
+
+        <div class="content__main" style="margin-bottom: 50px; cursor: unset">
+            <p class="content__main-title" style="background-color: #76ee76">Bài toán {{PlusOne index}}
+                <i class="fas fa-check-circle" style="color: #000000; transform: translateY(-3px);"></i>
+            </p>
+            <p style="margin-right: 50px; margin-top:50px " class="content__main-score">{{Problem.score}} điểm</p>
+            <p class="list__text-topic" style="padding-top: 20px;">{{Problem.context}}</p>
+            {{{Problem.problem}}}
+        </div>
+        {{#if isEmptySol}}
+            <p style="text-align: center; font-weight:700; padding:30px 0; margin-top: 10px">Bài toán này chưa có lời giải nào!</p>
+        {{else}}
+            {{#each ListSolutions}}
+            <div>
+                <div class="submit">
+                    <div style="padding: 20px; display: inline-block; border-radius: 10px;">
+                        <div style="display: flex;">
+                            <img src="../../img/{{this.avatar}}" alt="" class="submit__avatar"
+                                style="float: left; margin-right: 10px; ">
+                            {{!-- <p class="submit__author" style="float: left; margin-top: 10px; color: {{this.color}}">{{this.au}}</p> --}}
+                            <a style="transform: translate(0, 10px)" href="/user/{{this.idALC}}">
+                                <span style="color: {{this.color}}; font-weight: {{this.fontWeight}};" >{{this.au}}</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="submit__img-style" style="margin: 20px 0px; position: relative;">
+                        {{#if this.imageA}}
+
+                        <div class="submit__img-block">
+                            <img class="submit__img" src="/img/{{this.imageA}}" alt="">
+                        </div>
+                        {{/if}}
+                        {{#if this.imageB}}
+                        <div class="submit__img-block">
+                            <img class="submit__img" src="/img/{{this.imageB}}" alt="">
+                        </div>
+                        {{/if}}
+                        {{#if this.imageC}}
+                        <div class="submit__img-block">
+                            <img class="submit__img" src="/img/{{this.imageC}}" alt="">
+                        </div>
+                        {{/if}}
+                        <div class="overlay dp-n">
+                        </div>
+                        <img class="overlayImage" src="">
+                        {{#if this.sequence}}
+                            <div style="width: 600px; margin: 0 auto">
+                                {{#each this.sequence}}
+                                    {{#condition this.type "text"}}
+                                        <p>{{../this.content}}</p>
+                                    {{else}}
+                                        <img src="https://latex.codecogs.com/svg.image?{{../this.content}}" alt="" style="margin: 10px auto; display: block">
+                                    {{/condition}}
+                                {{/each}}
+                            </div>
+                        {{/if}}
+                    </div>
+                    <h5 style="color: red; margin-left:30px">{{{this.comment}}}</h5>
+                    
+                </div>
+            </div>
+            {{/each}}
+        {{/if}}
+</section>
+
+<script>
+    var submitImgstyle = document.getElementsByClassName('submit__img-style');
+
+    var overlayClick = document.getElementsByClassName('overlay');
+
+    var overlayImageClick = document.getElementsByClassName('overlayImage');
+
+    for (let i = 0; i < submitImgstyle.length; i++) {
+        let x = submitImgstyle[i].getElementsByClassName('submit__img');
+        for (let j = 0; j < x.length; j++) {
+            x[j].addEventListener('click', function () {
+                let z = x[j].src;
+                overlayClick[i].classList.remove('dp-n');
+                overlayImageClick[i].src = z;
+            });
+            overlayClick[i].addEventListener('click', function () {
+                overlayClick[i].classList.add('dp-n');
+                overlayImageClick[i].src = "";
+            })
+        }
+    }
+
+
+
+
+</script>
+<script>
+    function goBackWithoutSlash() {
+        if (window.history.length > 1) {
+            window.history.back();
+        } else {
+            window.location.href = '/';
+        }
+    }
+</script>

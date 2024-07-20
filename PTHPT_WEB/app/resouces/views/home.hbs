@@ -1,0 +1,249 @@
+<link rel="stylesheet" href="css/app.css">
+<div class="container">
+    <section>
+        <div class="content">
+            {{#each Announcement}}
+            <div class="content__main">
+                <p class="content__main-title">
+                    <i class="far fa-bell fa-lg" style="color: #000000;"></i>
+                    {{this.title}}
+                    <i class="far fa-bell fa-lg" style="color: #000000;"></i>
+                </p>
+                <p class="content__main-time">{{this.date}}</p>
+                <div class="content__main-desc">
+                    {{{this.description}}}
+                
+                </div>
+                <button class="content__main-button" type="button">
+                    Xem thêm
+                    <i class="fas fa-angle-double-down" style="color: #000000;"></i>
+                </button>
+
+                <div class="content__main-tool">
+                    <div class="content__main-gradient"></div>
+                    <div class="like {{#if this.lliked}}lliked{{/if}}">
+                        {{#if this.lliked}}
+                        <i class="far fa-heart" style="color: #000000;"></i>
+                        <i class="fas fa-heart frist" style="color: #000000;"></i>
+                        {{else}}
+                        <i class="far fa-heart frist" style="color: #000000;"></i>
+                        <i class="fas fa-heart" style="color: #000000;"></i>
+                        {{/if}}
+
+                        <span> Thích <span style="padding-left: 5px;" class="liked">{{this.numberReact}}</span> </span>
+                    </div>
+                    <div class="comment"><a href="/announcement/{{this._id}}"><i class="far fa-comment-alt"></i> Bình
+                            luận</a></div>
+                    <div class="share" onclick="copyText(`{{this._id}}`)"><i class="fas fa-share"></i> Chia sẻ</div>
+                    <p id="{{this._id}}" style="display: none;">announcement/{{{this._id}}}</p>
+
+                </div>
+
+            </div>
+            {{/each}}
+        </div>
+
+        <div class="sideBarright">
+            <table>
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Nick Name</th>
+                        <th>Điểm số</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each listUser}}
+                    <tr>
+                        <td>{{PlusOne @index}}</td>
+                        <td>
+                            <h5>
+                                <a style="color: {{this.color}};" href="/user/{{this._id}}">
+                                    {{!-- <span class="{{#condition this.role "admin"}} gradientColor {{/condition}}"> --}}
+                                    <span style="font-weight: {{this.fontWeight}}">
+                                        {{this.username}}
+                                    </span>
+                                </a>
+                            </h5>
+                        </td>
+                        <td>{{this.score}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+            <table>
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Cuộc thi gần đây</th>
+                        <th>Thí sinh</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each ContestProblem}}
+                    <tr>
+                        <td>{{PlusOne @index}}</td>
+                        <td>{{this.name}}</td>
+                        <td>{{this.AmountAttendee}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+            <div style="width: 450px"></div>
+        </div>
+    </section>
+</div>
+<div class="toast">
+
+    <div class="toast-content">
+        <i id="iconToast" class="fas fa-exclamation-triangle check"></i>
+
+        <div class="message">
+            <span id="text-1" class="text text-1">Thất bại!</span>
+            <span id="text-2" class="text text-2">Bạn cần đăng nhập để làm thao tác này</span>
+        </div>
+    </div>
+    <i class="far fa-times-circle close" style="color: #000000;"></i>
+
+    <div id="progress" class="progress"></div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+
+    var socket = io();
+
+    var tdTag = document.getElementsByTagName("td")
+    var Top1 = document.createElement("img");
+    var Top2 = document.createElement("img");
+    var Top3 = document.createElement("img");
+    Top1.src = '/img/gold-medal.png';
+    Top1.width = 20;
+    Top1.className = 'imageMedal';
+    tdTag[0].appendChild(Top1);
+    Top2.src = '/img/silver-medal.png';
+    Top2.width = 20;
+    Top2.className = 'imageMedal';
+    tdTag[3].appendChild(Top2);
+    Top3.src = '/img/bronze-medal.png';
+    Top3.width = 20;
+    Top3.className = 'imageMedal';
+    tdTag[6].appendChild(Top3);
+
+    var buttonContent = document.getElementsByClassName('content__main-button');
+    var gradientContent = document.getElementsByClassName('content__main-gradient')
+
+    var contentMain = document.getElementsByClassName('content__main-desc');
+    function activeContentMain(index) {
+        contentMain[index].classList.add('content__main-active');
+    }
+    for (let i = 0; i < buttonContent.length; i++) {
+        buttonContent[i].addEventListener('click', () => {
+            activeContentMain(i)
+            buttonContent[i].style.display = "none";
+            gradientContent[i].style.display = "none";
+        })
+    }
+
+    var likeEffect = document.getElementsByClassName("like")
+    var first = document.getElementsByClassName("far fa-heart")
+    var second = document.getElementsByClassName("fas fa-heart")
+    var liked = document.getElementsByClassName("liked")
+    for (let i = 0; i < likeEffect.length; i++) {
+        likeEffect[i].addEventListener('click', () => {
+            socket.emit('reactNews', `{{user.username}}`, likeEffect.length - i - 1)
+        })
+    }
+
+    function createToast(text1, text2, status) {
+        var toast = document.getElementsByClassName("toast")[0]
+        var IconClose = document.getElementsByClassName("close")[0]
+        var textOne = document.getElementById("text-1")
+        var textTwo = document.getElementById("text-2")
+        var iconToast = document.getElementById("iconToast")
+        var progress = document.getElementById("progress")
+
+        textOne.innerText = text1
+        textTwo.innerText = text2
+
+        iconToast.classList = [];
+
+        (status === 1) ? iconToast.classList.add('fas', 'fa-check-circle', 'success') : iconToast.classList.add('fas', 'fa-exclamation-triangle', 'check')
+
+        var beforeProgress = window.getComputedStyle(progress, '::before');
+
+        try {
+            var styleProgress = document.styleSheets[6].cssRules[60]
+            styleProgress.style.backgroundColor = (status === 1) ? "#00ff00" : "#ff2626"
+        }
+        catch {
+
+        }
+
+        IconClose.addEventListener("click", () => {
+            toast.classList.remove("active");
+
+            setTimeout(() => {
+                progress.classList.remove("active");
+            }, 300);
+
+            clearTimeout(timer1);
+            clearTimeout(timer2);
+        });
+
+        activeEffect(toast, progress)
+    }
+
+    function activeEffect(toast, progress) {
+        toast.classList.add("active");
+        progress.classList.add("active");
+
+        let timer1 = setTimeout(() => {
+            toast.classList.remove("active");
+        }, 5000);
+
+        let timer2 = setTimeout(() => {
+            progress.classList.remove("active");
+        }, 5300);
+    }
+
+
+
+
+    function copyText(id) {
+        var textToCopy = document.getElementById(id);
+        var originalText = textToCopy.innerText;
+        var newText = window.location.href + originalText;
+        var tempTextArea = document.createElement("textarea");
+        tempTextArea.value = newText;
+        document.body.appendChild(tempTextArea);
+        tempTextArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempTextArea);
+
+        createToast("Thành công!", "Đã sao chép liên kết bài viết này", 1)
+    }
+
+    socket.on("ppp", (stt, index) => {
+        index = first.length - index - 1
+        console.log(index)
+        if (stt == 1) {
+            first[index].classList.toggle("frist")
+            second[index].classList.toggle("frist")
+            likeEffect[index].classList.toggle("lliked")
+            liked[index].innerHTML = parseInt(liked[index].innerHTML) + 1
+        }
+        if (stt == 0) {
+            first[index].classList.toggle("frist")
+            second[index].classList.toggle("frist")
+            likeEffect[index].classList.toggle("lliked")
+            liked[index].innerHTML = parseInt(liked[index].innerHTML) - 1
+        }
+        if (stt == -1) {
+            createToast("Thất bại!", "Bạn cần đăng nhập để thích bài viết này", 0)
+        }
+    })
+
+    console.log('Lượt truy cập: ', {{n}})
+
+</script>

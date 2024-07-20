@@ -1,0 +1,68 @@
+<link rel="stylesheet" href="../../../../../css/admin.css">
+<link rel="stylesheet" href="../../../../css/member.css">
+<div class="result">
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    <div class="input__container">
+                        <input id="search" onkeyup="search()" type="text" class="input">
+                        <div class="icon">
+                            <i class="fas fa-search icon__item"></i>
+                        </div>
+                    </div>
+                    Rank
+                </th>
+                <th>Tên người dùng</th>
+                <th>Chức danh</th>
+                <th>Bài tập</th>
+                <th>Kỳ thi</th>
+                <th class="medalMember">Vàng <img src="/img/gold-medal.png" width="20" class="imageMedal"></th>
+                <th class="medalMember">Bạc <img src="/img/silver-medal.png" width="20" class="imageMedal"></th>
+                <th class="medalMember">Đồng <img src="/img/bronze-medal.png" width="20" class="imageMedal"></th>
+                <th>Điểm</th>
+                <th>Chức năng</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each User}}
+            <tr class="user__list">
+                <td>{{PlusOne @index}}</td>
+                <td class="username__list">{{this.username}}</td>
+                <td>{{this.position}}</td>
+                <td>{{this.assignment}}</td>
+                <td>{{this.contest}}</td>
+                <td>{{this.AmountGolden}}</td>
+                <td>{{this.AmountSilver}}</td>
+                <td>{{this.AmountBronze}}</td>
+                <td>{{this.score}}</td>
+                <td><a href="member/{{this._id}}/detail">Chỉnh sửa</a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+<script>
+    function search() {
+        var search = document.getElementById("search").value;
+        var user = document.querySelectorAll(".user__list");
+        var username = document.getElementsByClassName("username__list");
+
+        for (var i = 0; i <= username.length; i++) {
+            var a = user[i].getElementsByClassName("username__list")[0];
+            var value = a.innerHTML || a.innerText || a.textContent;
+            if (value.indexOf(search) > -1) {
+                user[i].style.display = "";
+            }
+            else {
+                user[i].style.display = "none";
+            }
+        }
+
+    }
+    var Open = document.getElementsByClassName("icon")[0];
+    Open.addEventListener("click", () => {
+
+        document.getElementsByClassName("input")[0].classList.toggle("open")
+    })
+</script>

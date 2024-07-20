@@ -1,0 +1,42 @@
+<link rel="stylesheet" href="../../../../../css/admin.css">
+<link rel="stylesheet" href="../../../../../css/member.css">
+<div style="margin-top: 150px;" class="bodyDetail">
+    <form id="formassignment" method="POST" action="./create">
+    
+    <div class="input-container">
+        <label for="title">Tên dạng</label>
+        <input value="" type="text" id="title" name="title" required>
+
+        <label for="type">Mã dạng</label>
+        <input value="" type="text" id="type" name="type" required>
+
+        <label for="content">Câu dẫn</label>
+        <input value="Giải phương trình sau:" content="text" id="content" name="content" required>
+
+        <label for="image">Đề bài</label>
+        <textarea id="image" name="image" required></textarea>
+
+        <label for="resource">Nguồn</label>
+        <input value="Sưu tầm" type="text" id="resource" name="resource" required>
+        
+        <label for="score">Điểm</label>
+        <input value="" type="text" id="score" name="score" required>
+
+
+        <button id="submitassignment" type="submit">Tạo</button>
+    </div>
+    </form>
+</div>
+
+<script>
+  // Lấy URL hiện tại
+  var url = window.location.href;
+
+  // Tách các thành phần của URL bằng dấu "/"
+  var components = url.split("/");
+
+  // Lấy ra thành phần thứ 2 từ sau cùng
+  var result = components[components.length - 3];
+
+  document.getElementById("type").value = result
+</script>

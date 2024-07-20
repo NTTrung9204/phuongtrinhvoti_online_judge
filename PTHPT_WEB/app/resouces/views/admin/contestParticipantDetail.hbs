@@ -1,0 +1,36 @@
+<link rel="stylesheet" href="../../../../../css/admin.css">
+<link rel="stylesheet" href="../../../../../css/member.css">
+<div class="contestDetail">
+    <form id="formassignment" method="POST">
+
+        <h4 style="text-align: center; margin-bottom:30px">Bài làm của thí sinh: {{inforUserContest.username}}</h4>
+
+        <div class="input-container">
+            {{#each inforUserContest.listScore}}
+                <label for="listScore">Điểm bài {{PlusOne @index}}</label>
+                <input value="{{this}}" type="text" id="listScore" name="listScore">
+            {{/each}}
+
+            {{#each inforUserContest.listSubmission}}
+                <label for="context">Bài nộp {{PlusOne this.key}}</label>
+                {{#if this.imageA}}
+                    <input value="{{this.imageA}}" type="text" id="{{this.key}}imageA" name="{{this.key}}imageA">
+                {{/if}}
+                {{#if this.imageB}}
+                    <input value="{{this.imageB}}" type="text" id="{{this.key}}imageB" name="{{this.key}}imageB">
+                {{/if}}
+                {{#if this.imageC}}
+                    <input value="{{this.imageC}}" type="text" id="{{this.key}}imageC" name="{{this.key}}imageC">
+                {{/if}}
+
+                <label for="{{this.key}}comment">Nhận xét</label>
+                <textarea style="height: 100px;" id="{{this.key}}comment" name="{{this.key}}comment">{{this.comment}}</textarea>
+            {{/each}}
+
+            <div class="buttonContainer">
+                <button class="buttonContestDetail" id="submitassignment" type="submit">Cập nhật</button>
+            </div>
+
+        </div>
+    </form>
+</div>

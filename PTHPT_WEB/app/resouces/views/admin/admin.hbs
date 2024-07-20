@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../../../css/admin.css">
+    <link rel="stylesheet" href="../../../../../css/member.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+    <title>Document</title>
+</head>
+
+<body>
+    <main class="container" style="position: relative;">
+
+        <div class="adminContainer">
+            {{#condition userRole.role "admin"}}
+            <a href="admin/member" class="adminNavigate">Quản lý người dùng</a>
+            {{/condition}}
+            {{#condition userRole.role "admin"}}
+            <a href="admin/coreteam" class="adminNavigate">Quản lý đội ngũ</a>
+            {{/condition}}
+            <a href="admin/announcement" class="adminNavigate">Quản lý thông báo</a>
+            <a href="admin/topListAssignment" class="adminNavigate">Quản lý bài tập</a>
+            <a href="admin/contest" class="adminNavigate">Quản lý kỳ thi</a>
+        </div>
+
+        {{!-- <table class="table">
+            <tr class="row">
+                <th id="row__rank-1">Rank</th>
+                <th class="row__name">Tên đăng nhập</th>
+                <th class="row__score">Điểm</th>
+                <th class="row__vocab">Bài Tập</th>
+                <th class="row__exam">Số kì thi</th>
+                <th class="row__medal">Huy chương</th>
+                <th class="row__role">Vai trò</th>
+            </tr>
+            <tr class="btn">
+                <td><input type="number-btn" type="text" placeholder="Nhập user muốn sửa" id="search"
+                        onkeyup="search()"></td>
+                <td><input class="name-btn" type="text" placeholder="Sửa tên"></td>
+                <td><input class="score-btn" type="text" placeholder="Sửa điểm"></td>
+                <td><input class="vocab-btn" type="text" placeholder="Sửa vocab"></td>
+                <td><input class="exam-btn" type="text" placeholder="Sửa exam"></td>
+                <td>
+                    <input class="gold-btn" type="text" placeholder="vang">
+                    <input class="silver-btn" type="text" placeholder="bac">
+                    <input class="copper-btn" type="text" placeholder="dong">
+                </td>
+                <td><input class="role-btn" type="text" placeholder="sua vai tro"></td>
+
+            </tr>
+            {{#each userRank}}
+            <tr class="row user__list">
+                <td id="row__rank-2">{{sum @index 1}}</td>
+                <td class="row__name username__list">{{this.username}}</td>
+                <td class="row__score">{{this.points}}</td>
+                <td class="row__vocab">4</td>
+                <td class="row__exam">5</td>
+                <td class="row__medal">
+                    <i class="fas fa-medal row__medal-gold">
+                        <p class="number-gold">100</p>
+                    </i>
+                    <i class="fas fa-medal row__medal-silver">
+                        <p class="number-silver">200</p>
+                    </i>
+                    <i class="fas fa-medal row__medal-copper">
+                        <p class="number-copper">30</p>
+                    </i>
+                </td>
+                <td class="row__role">{{this.position}}</td>
+                <td><a href="/admin/{{this._id}}/edit">Repair</a></td>
+                <td><a href="/admin/{{this._id}}/delete">Delete</a></td>
+            </tr>
+            {{/each }}
+
+
+
+        </table> --}}
+
+        {{!-- <section>
+            <div class="result">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Thông báo</th>
+                            <th>Thời gian</th>
+                            <th>Chúc năng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each listUser}}
+                        <tr>
+                            <td>{{PlusOne @index}}</td>
+                            <td>{{this.username}}</td>
+                            <td>{{this.position}}</td>
+                            <td>{{this.assignment}}</td>
+                            <td>{{this.contest}}</td>
+                            <td>{{this.goldenMedal}}</td>
+                            <td>{{this.silverMedal}}</td>
+                            <td>{{this.bronzeMedal}}</td>
+                            <td>{{this.score}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </section> --}}
+
+        {{!-- <div class="confirm__exam dp-n"
+            style="padding: 20px; overflow: auto; width: 1400px ; height: 650px; left: 0; right: 0; margin: 0px 30px;">
+            <button class="close" style="padding: 20px;">
+                close
+            </button>
+            <div style="color: white;">
+                <div style="display: flex;">
+                    <div class="user">User 1</div>
+                    <button class="user__btn">Cút</button>
+                </div>
+                <div style="display: flex;">
+                    <div class="user">User 2</div>
+                    <button class="user__btn">Cút</button>
+                </div>
+                <div style="display: flex;">
+                    <div class="user">User 3</div>
+                    <button class="user__btn">Cút</button>
+                </div>
+                <div style="display: flex;">
+                    <div class="user">User 4</div>
+                    <button class="user__btn">Cút</button>
+                </div>
+                <div style="display: flex;">
+                    <div class="user">User 5</div>
+                    <button class="user__btn">Cút</button>
+                </div>
+                <div style="display: flex;">
+                    <div class="user">User 6</div>
+                    <button class="user__btn">Cút</button>
+                </div>
+                <div style="display: flex;">
+                    <div class="user">User 7</div>
+                    <button class="user__btn">Cút</button>
+                </div>
+            </div>
+            <table class="confirm-table__exam">
+                <tr class="confirm-table-tr__exam">
+                    <th>Tên bài làm</th>
+                    <th>Điểm</th>
+                    <th>Thời gian</th>
+                    <th>Ảnh</th>
+                    <th>desc bài làm</th>
+                </tr>
+                <tr>
+                    <td><textarea class="create-bt-exam__title" placeholder="Tên bài tập"
+                            style="width:100px;"></textarea></td>
+                    <td><textarea class="create-bt-exam__score" placeholder="Số điểm" style="width:100px;"></textarea>
+                    </td>
+                    <td><textarea class="create-bt-exam__time" placeholder="Thời gian" style="width:100px;"></textarea>
+                    </td>
+                    <td><input class="create-bt-exam__img" type="file" accept="image/*"></td>
+                    <td><textarea class="create-bt-exam__desc" placeholder="Bài viết"></textarea></td>
+                    <td><button class="create-bt-exam__btn" type="button">Tao</button></td>
+                </tr>
+                <tr>
+                    <td>
+                        <textarea class="bt-exam__title" name="" id="" cols="30" rows="10">
+                    Đặt ẩn phụ
+                    </textarea>
+                    </td>
+                    <td>
+                        <textarea class="bt-exam__score" name="" id="" cols="30" rows="10">
+                    100 điểm
+                    </textarea>
+                    </td>
+                    <td>
+                        <textarea class="bt-exam__time" name="" id="" cols="30" rows="10">
+                    time
+                    </textarea>
+                    </td>
+                    <td><input class="bt-exam__img" type="file" accept="image/*"></td>
+                    <td>
+                        <textarea class="bt-exam__desc" name="" id="" cols="30" rows="10">
+                    Tại buổi tiếp, đồng chí Bùi Quang Huy bày tỏ niềm vui, đánh giá
+                    cao chuyến thăm và làm việc của ông Suzuki Keisuke tại Việt Nam,
+                    tin tưởng rằng cuộc gặp gỡ tại Trung ương Đoàn sẽ góp phần tăng
+                    cường hiểu biết, củng cố, phát triển hơn nữa mối quan hệ hợp tác
+                    SSEAYP,
+                    </textarea>
+                    </td>
+                    <td>
+                        <button class="bt-exam__btn" type="button">Chỉnh sửa</button>
+                    </td>
+                    <td>
+                        <button class="bt-exam__btn-delete" type="button">Xóa</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <textarea class="bt-exam__title" name="" id="" cols="30" rows="10">
+                    Đặt ẩn phụ
+                    </textarea>
+                    </td>
+                    <td>
+                        <textarea class="bt-exam__score" name="" id="" cols="30" rows="10">
+                    100 điểm
+                    </textarea>
+                    </td>
+                    <td>
+                        <textarea class="bt-exam__time" name="" id="" cols="30" rows="10">
+                    time
+                    </textarea>
+                    </td>
+                    <td><input class="bt-exam__img" type="file" accept="image/*"></td>
+                    <td>
+                        <textarea class="bt-exam__desc" name="" id="" cols="30" rows="10">
+                    Tại buổi tiếp, đồng chí Bùi Quang Huy bày tỏ niềm vui, đánh giá
+                    cao chuyến thăm và làm việc của ông Suzuki Keisuke tại Việt Nam,
+                    tin tưởng rằng cuộc gặp gỡ tại Trung ương Đoàn sẽ góp phần tăng
+                    cường hiểu biết, củng cố, phát triển hơn nữa mối quan hệ hợp tác
+                    SSEAYP,
+                    </textarea>
+                    </td>
+                    <td>
+                        <button class="bt-exam__btn" type="button">Chỉnh sửa</button>
+                    </td>
+                    <td>
+                        <button class="bt-exam__btn-delete" type="button">Xóa</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <textarea class="bt-exam__title" name="" id="" cols="30" rows="10">
+                    Đặt ẩn phụ
+                    </textarea>
+                    </td>
+                    <td>
+                        <textarea class="bt-exam__score" name="" id="" cols="30" rows="10">
+                    100 điểm
+                    </textarea>
+                    </td>
+                    <td>
+                        <textarea class="bt-exam__time" name="" id="" cols="30" rows="10">
+                    time
+                    </textarea>
+                    </td>
+                    <td><input class="bt-exam__img" type="file" accept="image/*"></td>
+                    <td>
+                        <textarea class="bt-exam__desc" name="" id="" cols="30" rows="10">
+                    Tại buổi tiếp, đồng chí Bùi Quang Huy bày tỏ niềm vui, đánh giá
+                    cao chuyến thăm và làm việc của ông Suzuki Keisuke tại Việt Nam,
+                    tin tưởng rằng cuộc gặp gỡ tại Trung ương Đoàn sẽ góp phần tăng
+                    cường hiểu biết, củng cố, phát triển hơn nữa mối quan hệ hợp tác
+                    SSEAYP,
+                    </textarea>
+                    </td>
+                    <td>
+                        <button class="bt-exam__btn" type="button">Chỉnh sửa</button>
+                    </td>
+                    <td>
+                        <button class="bt-exam__btn-delete" type="button">Xóa</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <textarea class="bt-exam__title" name="" id="" cols="30" rows="10">
+                    Đặt ẩn phụ
+                    </textarea>
+                    </td>
+                    <td>
+                        <textarea class="bt-exam__score" name="" id="" cols="30" rows="10">
+                    100 điểm
+                    </textarea>
+                    </td>
+                    <td>
+                        <textarea class="bt-exam__time" name="" id="" cols="30" rows="10">
+                    time
+                    </textarea>
+                    </td>
+                    <td><input class="bt-exam__img" type="file" accept="image/*"></td>
+                    <td>
+                        <textarea class="bt-exam__desc" name="" id="" cols="30" rows="10">
+                    Tại buổi tiếp, đồng chí Bùi Quang Huy bày tỏ niềm vui, đánh giá
+                    cao chuyến thăm và làm việc của ông Suzuki Keisuke tại Việt Nam,
+                    tin tưởng rằng cuộc gặp gỡ tại Trung ương Đoàn sẽ góp phần tăng
+                    cường hiểu biết, củng cố, phát triển hơn nữa mối quan hệ hợp tác
+                    SSEAYP,
+                    </textarea>
+                    </td>
+                    <td>
+                        <button class="bt-exam__btn" type="button">Chỉnh sửa</button>
+                    </td>
+                    <td>
+                        <button class="bt-exam__btn-delete" type="button">Xóa</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <form class="create__click" style="width: 50%; background-color: aquamarine; margin: 100px;" method="POST"
+            action="/admin/createPosts">
+            <h1>Tao Bai Viet</h1>
+            <textarea name="title" id="title" cols="65" rows="1" class="create-title" placeholder="Title" value=""
+                style="padding: 10px; margin: 10px;"></textarea>
+            <textarea name="description" id="description" cols="65" rows="10" class="create-desc" placeholder="Decs1"
+                value="" style="padding: 10px; margin: 10px;"></textarea>
+            <input class="create-img" type="file" accept="image/*">
+            <button type="submit" class="create-submit" style="padding: 10px; margin: 10px;">Create</button>
+        </form>
+
+
+        <div>
+            <table class="content" style="overflow: auto;">
+                <tr>
+                    <th>title</th>
+                    <th>time</th>
+                    <th>desc 1</th>
+                    <th>img 1</th>
+                    <th>desc 2</th>
+                    <th>img 2</th>
+                </tr>
+                <tr>
+                    <td><textarea class="content__title"></textarea></td>
+                    <td><textarea class="content__time"></textarea></td>
+                    <td><textarea class="content__desc-1"></textarea></td>
+                    <td><input class="content__img-1" type="file" accept="image/*"></td>
+                    <td><textarea class="content__desc-2"></textarea></td>
+                    <td><input class="content__img-2" type="file" accept="image/*"></td>
+                    <td><button class="content__confirm" type="button">Xac nhan thay doi</button></td>
+                    <td><button class="content__delete" type="button">Xoa</button></td>
+                </tr>
+                <tr>
+                    <td><textarea class="content__title"></textarea></td>
+                    <td><textarea class="content__time"></textarea></td>
+                    <td><textarea class="content__desc-1"></textarea></td>
+                    <td><input class="content__img-1" type="file" accept="image/*"></td>
+                    <td><textarea class="content__desc-2"></textarea></td>
+                    <td><input class="content__img-2" type="file" accept="image/*"></td>
+                    <td><button class="content__confirm" type="button">Xac nhan thay doi</button></td>
+                    <td><button class="content__delete" type="button">Xoa</button></td>
+                </tr>
+            </table>
+        </div>
+
+
+        <form class="create__click" style="width: 50%; background-color: aquamarine; margin: 100px;" method="POST"
+            action="/admin/createExercise">
+            <h1>Tao Bai Tap</h1>
+            <textarea name="title" id="title" cols="65" rows="1" class="create-title" placeholder="Title" value=""
+                style="padding: 10px; margin: 10px;"></textarea>
+            <textarea name="score" id="score" cols="65" rows="1" class="create-title" placeholder="Score" value=""
+                style="padding: 10px; margin: 10px;"></textarea>
+            <textarea name="author" id="author" cols="65" rows="1" class="create-title" placeholder="Author" value=""
+                style="padding: 10px; margin: 10px;"></textarea>
+            <textarea name="description" id="description" cols="65" rows="10" class="create-desc"
+                placeholder="Description" value="" style="padding: 10px; margin: 10px;"></textarea>
+            <input class="hw-create-img" type="file" accept="image/*">
+
+            <button type="submit" class="hw-create-submit" style="padding: 10px; margin: 10px;">Create</button>
+        </form>
+
+        <table class="hw-content" style="overflow: auto;">
+            <tr>
+                <th>title</th>
+                <th>score</th>
+                <th>time</th>
+                <th>img</th>
+                <th>desc</th>
+            </tr>
+            <tr>
+                <td><textarea class="hw-content__title"></textarea></td>
+                <td><textarea class="hw-content__score"></textarea></td>
+                <td><textarea class="hw-content__time"></textarea></td>
+                <td><input class="hw-content__img" type="file" accept="image/*"></td>
+                <td><textarea class="hw-content__desc"></textarea></td>
+                <td><button class="hw-content__confirm" type="button">Xac nhan thay doi</button></td>
+                <td><button class="hw-content__delete" type="button">Xoa</button></td>
+            </tr>
+            <tr>
+                <td><textarea class="hw-content__title"></textarea></td>
+                <td><textarea class="hw-content__score"></textarea></td>
+                <td><textarea class="hw-content__time"></textarea></td>
+                <td><input class="hw-content__img" type="file" accept="image/*"></td>
+                <td><textarea class="hw-content__desc"></textarea></td>
+                <td><button class="hw-content__confirm" type="button">Xac nhan thay doi</button></td>
+                <td><button class="hw-content__delete" type="button">Xoa</button></td>
+            </tr>
+        </table> --}}
+
+    </main>
+</body>
+
+
+
+
+
+<script>
+    function search() {
+        var search = document.getElementById("search").value;
+        var user = document.querySelectorAll(".user__list");
+
+        var username = document.getElementsByClassName("username__list");
+
+        for (var i = 0; i <= username.length; i++) {
+            var a = user[i].getElementsByClassName("username__list")[0];
+            var value = a.innerHTML || a.innerText || a.textContent;
+            if (value.indexOf(search) > -1) {
+                user[i].style.display = "";
+            }
+            else {
+                user[i].style.display = "none";
+            }
+        }
+
+    }
+
+
+</script>
+
+</html>

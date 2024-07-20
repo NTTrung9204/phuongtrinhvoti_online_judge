@@ -1,0 +1,56 @@
+<link rel="stylesheet" href="../../../../../css/admin.css">
+<link rel="stylesheet" href="../../../../../css/member.css">
+<div class="contestDetail">
+    <form id="formassignment" method="POST">
+
+        <div class="input-container">
+            <label for="name">Tên cuộc thi</label>
+            <input value="{{contest.name}}" type="text" id="name" name="name">
+
+            <label for="duration">Thời gian còn lại</label>
+            <input value="{{contest.duration}}" type="text" id="duration" name="duration">
+
+            <label for="date">Ngày</label>
+            <input value="{{contest.date}}" type="text" id="date" name="date">
+
+            <label for="timeStart">Thời gian bắt đầu</label>
+            <input value="{{contest.timeStart}}" type="text" id="timeStart" name="timeStart">
+
+            <label for="timeTotal">Thời gian làm bài</label>
+            <input value="{{contest.timeTotal}}" type="text" id="timeTotal" name="timeTotal">
+
+            <label for="status">Trạng thái cuộc thi</label>
+            <input value="{{contest.status}}" type="text" id="status" name="status">
+
+            <label for="password">Password</label>
+            <input value="{{contest.password}}" type="text" id="password" name="password">  
+
+            {{#each contest.problems}}
+            <label for="context">Đề bài {{PlusOne @index}}</label>
+            <input value="{{this.context}}" type="text" id="context" name="context">
+            <input value="{{this.score}}" type="text" id="score" name="score">
+
+            <label for="problem">Bài toán {{PlusOne @index}}</label>
+            <textarea id="problem" name="problem">{{this.problem}}</textarea>
+            {{/each}}
+
+            <div class="buttonContainer">
+                <button form="formassignment" class="buttonContestDetail" id="submitassignment" type="submit">Cập nhật</button>
+                <a class="buttonContestDetail" href="participants">Người tham gia</a>
+                    <button type="submit" form="listScoreForm" class="buttonContestDetail">Chốt điểm</button>
+            </div>
+
+        </div>
+    </form>
+    <form id="listScoreForm" action="updateScore" method="post">
+    </form>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var updateButton = document.getElementById("submitassignment")
+    var socket = io();
+    updateButton.addEventListener('click', ()=>{
+        socket.emit('updateContest', true)
+    })
+</script>
+

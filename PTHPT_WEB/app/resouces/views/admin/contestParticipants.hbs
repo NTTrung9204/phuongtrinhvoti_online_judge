@@ -1,0 +1,44 @@
+<link rel="stylesheet" href="../../../../../css/admin.css">
+<link rel="stylesheet" href="../../../../../css/member.css">
+<div class="result">
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    STT
+                </th>
+                <th>Người tham gia</th>
+                <th>Số bài đã nộp</th>
+                <th>Tình trạng</th>
+                <th>Chức năng</th>
+                <th>Cấm thi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each contest.participants}}
+            <tr>
+                <td>{{PlusOne @index}}</td>
+                <td>{{this.username}}</td>
+                <td>{{this.submission}}</td>
+                <td>{{#condition this.banned 0}}Bình thường{{else}}Bị cấm{{/condition}}</td>
+                <td><a href="Participants/{{this.username}}/detail">Chỉnh sửa</a></td>
+                <td><a  id="banButton" href="Participants/{{this.username}}/ban">
+                    {{#condition this.banned 0}}
+                        <span data-username="{{../this.username}}" style="color: red; font-weight:700">Cấm thi</span>
+                    {{else}}
+                        <span data-username="{{../this.username}}" style="color: rgb(115, 255, 0); font-weight:700">Khôi phục</span>
+                    {{/condition}}
+                </a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var banButton = document.getElementById("banButton")
+    var socket = io();
+    banButton.addEventListener('click', (e)=>{
+        socket.emit('banParticipant', e.target.getAttribute("data-username"))
+    })
+</script>

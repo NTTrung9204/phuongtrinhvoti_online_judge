@@ -1,0 +1,56 @@
+<link rel="stylesheet" href="css/about.css">
+<div class="information">
+    <div class="infor__blog">
+        <div class="infor__header__sign"><i class="far fa-clipboard" style="margin-right: 10px;"></i>Giới thiệu</div>
+        <div class="infor__blog__description">
+            <div class="infor__blog__des">
+                Phương Trình - Hệ Phương Trình ( PTHPT ) là một trang chuyên về các phương trình và hệ phương trình vô
+                tỉ. Với mục đích ban đầu được thiết kế nhằm hỗ trợ học tập và rèn luyện kỹ năng giải toán cho các bạn
+                học sinh, sinh viên và giáo viên. Với mong muốn giúp đỡ và tạo ra môi trường học tập đáng tin cậy, PTHPT
+                ra đời với những nội dung giáo dục phong phú, sẽ đồng hành cùng bạn trên hành trình chinh phục những thử
+                thách toán học. <br><br>
+                Trang web của chúng tôi tự hào sở hữu một kho tàng kiến thức vô cùng đa dạng về các dạng phương trình và
+                hệ phương trình. Các bài tập được tổ chức và chia theo từng dạng, giúp các bạn dễ dàng nắm bắt và củng
+                cố kiến thức từ cơ bản đến nâng cao. Ngoài ra, các nội dung được trình bày một cách rõ ràng và dễ hiểu,
+                giúp bạn tiếp cận môn học một cách hiệu quả nhất. <br><br>
+                PTHPT không chỉ cung cấp kiến thức mà còn tập trung vào việc rèn luyện kỹ năng giải quyết bài tập. Chúng
+                tôi xây dựng các bài tập đồ sộ, từ các kỳ thi Học Sinh Giỏi trong nước và quốc tế, đến các cuộc thi định
+                kỳ hấp dẫn <br><br>
+                Đặc biệt, PTHPT cũng tổ chức các cuộc thi, contest định kỳ để xếp loại và thúc đẩy tinh thần cạnh tranh
+                giữa các bạn học sinh, sinh viên. Những đóng góp và thành tích xuất sắc sẽ được ghi nhận và đánh giá,
+                giúp các bạn có động lực hơn để tiếp tục nỗ lực, vươn tới những thành công mới. <br><br>
+            </div>
+            <div class="infor__blog__image">
+                <img src="img/introduce.png" alt="" class="infor__blog__image__item">
+            </div>
+            <div class="infor__blog__des">
+                Trang web chính thức : Website <br><br>
+                Fanpage của chúng tôi : Fanpage <br><br>
+                Group trao đổi, giải đáp : Group <br><br>
+            </div>
+        </div>
+    </div>
+
+    <div class="infor__blog last_infor_blog">
+        <div class="infor__header__sign"><i class="fas fa-users" style="margin-right: 10px;"></i>Đội ngũ phát triển
+        </div>
+        <div class="card">
+            {{#each coreteam}}
+            <div class="cardProfile">
+                <div class="imgcontainer">
+                    <img class="cardProfile__img__Second"
+                        src="{{this.imageSecond}}" alt="">
+                    <img class="cardProfile__img__Frist"
+                        src="{{this.imageFrist}}"
+                        alt="">
+                </div>
+                <div class="cardProfile__infor__frist">
+                    <a href="/user/{{this.idUser}}" class="nameDev">{{this.name}}</a>
+                    <p><i class="fas fa-user"></i> {{this.role}}</p>
+                    <a><i class="fas fa-envelope"></i> {{this.mail}}</a>
+                    <p><i class="fas fa-map-marker-alt"></i> {{this.location}}</p>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>

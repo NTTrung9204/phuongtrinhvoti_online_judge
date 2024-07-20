@@ -1,0 +1,45 @@
+<link rel="stylesheet" href="./../../../../css/admin.css">
+<link rel="stylesheet" href="../../../css/member.css">
+<div style="margin-top: 90px;" class="result">
+    <table>
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Người nộp</th>
+                <th>Tên bài</th>
+                <th>Đề bài</th>
+                <th>Điểm</th>
+                <th>Thời gian</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each submission}}
+            <tr>
+                <td>{{this.id}}</td>
+                <td>
+                    <h5>
+                        <a style="color: {{this.color}};" href="/user/{{this.idALC}}">
+                            {{!-- <span class="{{#condition this.role "admin"}}gradientColor
+                                {{/condition}}">{{this.applicant}}
+                            </span> --}}
+                            <span style="font-weight: {{this.fontWeight}} !important;">{{this.applicant}}</span>
+                        </a>
+                    </h5>
+                </td>
+                <td><a href="/assignment/view/{{this.key}}">{{this.title}}</a></td>
+                <td>{{{this.image}}}</td>
+                <td>{{this.score}}</td>
+                <td>{{this.date}}<br>{{this.time}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+</div>
+<div style="display:flex">
+    <div class="pagination pagination-style-three m-t-20 m-b-40">
+        {{#each paginationLoop}}
+        <a href="/submission/{{@index}}" class="{{#condition this ../page}}selected{{/condition}}">{{this}}</a>
+        {{/each}}
+    </div>
+</div>

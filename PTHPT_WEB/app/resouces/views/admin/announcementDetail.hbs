@@ -1,0 +1,22 @@
+<link rel="stylesheet" href="../../../css/admin.css">
+<link rel="stylesheet" href="../../../css/member.css">
+<div style="margin-top: 50px;" class="bodyDetail">
+    <form id="formAnnouncement" method="POST" action="./update">
+    
+    <div class="input-container">
+        <label for="title">Title:</label>
+        <input value="{{Announcement.title}}" type="text" id="title" name="title" required>
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required>{{Announcement.description}}</textarea>
+
+        <label for="time">Time:</label>
+        <input value="{{Announcement.date}}" type="text" id="time" name="time" required>
+
+        <label for="deleted">Deleted:</label>
+        <input value="{{Announcement.deleted}}" type="text" id="deleted" name="deleted">
+
+        <button id="submitAnnouncement" type="submit">Submit</button>
+    </div>
+    </form>
+</div>

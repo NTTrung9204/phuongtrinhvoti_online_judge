@@ -1,0 +1,34 @@
+<link rel="stylesheet" href="./../../../../css/admin.css">
+<link rel="stylesheet" href="../../../css/member.css">
+<div class="result">
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    <a class="createAnnouncement" href="./assignment/create">Tạo</a>
+
+                    STT
+                </th>
+                <th>Tên dạng</th>
+                <th>Câu dẫn</th>
+                <th>Đề bài</th>
+                <th>Điểm</th>
+                <th>Đã xóa?</th>
+                <th>Chức năng</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each assignment}}
+            <tr>
+                <td>{{PlusOne @index}}</td>
+                <td>{{this.title}}</td>
+                <td>{{this.content}}</td>
+                <td>{{{this.image}}}</td>
+                <td>{{{this.score}}}</td>
+                <td>{{{this.deleted}}}</td>
+                <td><a href="assignment/{{this._id}}/detail">Chỉnh sửa</a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

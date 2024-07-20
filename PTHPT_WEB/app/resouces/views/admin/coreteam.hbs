@@ -1,0 +1,30 @@
+<link rel="stylesheet" href="./../../../../css/admin.css">
+<link rel="stylesheet" href="../../../css/member.css">
+<div class="result">
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    <a class="createAnnouncement" href="./coreteam/create">Tạo</a>
+
+                    STT
+                </th>
+                <th>Họ và tên</th>
+                <th>Thời gian</th>
+                <th>Chức năng</th>
+                <th>Chức năng</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each coreteam}}
+            <tr>
+                <td>{{PlusOne @index}}</td>
+                <td>{{this.name}}</td>
+                <td>{{this.time}}</td>
+                <td><a href="coreteam/{{this._id}}/detail">Chỉnh sửa</a></td>
+                <td><a style="color: red; font-weight:700" href="coreteam/{{this._id}}/delete">Xóa</a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,16 @@
+<link rel="stylesheet" href="../../../../../css/admin.css">
+<link rel="stylesheet" href="../../../../../css/member.css">
+<div class="contestDetail">
+    <form id="formassignment" method="POST">
+        <div class="input-container">
+            <label for="name">Nhập mã xác thực đã gửi qua gmail</label>
+            <input value="" type="text" id="name" name="passcode">
+            <span style="color: red;">{{errorPasscode}}</span>
+
+            <div class="buttonContainer">
+                <button form="formassignment" class="buttonContestDetail" id="submitassignment" type="submit">Gửi</button>
+            </div>
+
+        </div>
+    </form>
+</div>

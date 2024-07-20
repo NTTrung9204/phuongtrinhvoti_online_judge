@@ -1,0 +1,50 @@
+<link rel="stylesheet" href="./../../../../css/admin.css">
+<link rel="stylesheet" href="../../../css/member.css">
+{{#if isEmpty}}
+<h5 style="text-align: center; margin-top:100px">Người dùng {{listUser.username}} chưa làm bài nào!</h5>
+{{else}}
+    <h5 style="text-align: center; margin-top:100px">Bài nộp của: {{listUser.username}}</h5>
+    <div style="margin-top: 40px;" class="result">
+        <table>
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Người nộp</th>
+                    <th>Tên bài</th>
+                    <th>Đề bài</th>
+                    <th>Điểm</th>
+                    <th>Thời gian</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each submission}}
+                <tr>
+                    <td>{{this.id}}</td>
+                    <td>
+                        <h5>
+                            <a style="color: {{this.color}};" href="/user/{{this.idALC}}">
+                                {{!-- <span class="{{#condition this.role "admin"}}gradientColor
+                                    {{/condition}}">{{this.applicant}}
+                                </span> --}}
+                                <span style="font-weight: {{this.fontWeight}} !important;">{{this.applicant}}</span>
+                            </a>
+                        </h5>
+                    </td>
+                    <td><a href="/assignment/view/{{this.key}}">{{this.title}}</a></td>
+                    <td>{{{this.image}}}</td>
+                    <td>{{this.score}}</td>
+                    <td>{{this.date}}<br>{{this.time}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+
+    </div>
+    <div style="display:flex">
+        <div class="pagination pagination-style-three m-t-20 m-b-40">
+            {{#each paginationLoop}}
+            <a href="/user/{{../listUser._id}}/submission/{{@index}}" class="{{#condition this ../page}}selected{{/condition}}">{{this}}</a>
+            {{/each}}
+        </div>
+    </div>
+{{/if}}

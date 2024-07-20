@@ -1,0 +1,70 @@
+<link rel="stylesheet" href="../../../../../css/header.css">
+<div class="navbar">
+  <ul class="header__nav">
+    <li><a class="header__nav-item" href="/">TRANG CHỦ</a></li>
+    <li><a class="header__nav-item" href="/assignment">BÀI TẬP</a></li>
+    <li><a class="header__nav-item" href="/submission">BÀI NỘP</a></li>
+    <li><a class="header__nav-item" href="/member">THÀNH VIÊN</a></li>
+    <li><a class="header__nav-item" href="/contest">KÌ THI</a></li>
+    <li><a class="header__nav-item" href="/about">GIỚI THIỆU</a></li>
+  </ul>
+  <ul class="header__nav">
+    {{#if user.username}}
+    <button class="bell_button">
+      {{!-- <i class="far fa-bell bell__icon"></i> --}}
+      
+      <span class="bell_amount" style="display: {{#if user.isNew}}inline{{else}}none{{/if}};"></span>
+      <div class="sec-center">
+        <input class="dropdown" type="checkbox" id="dropdown" name="dropdown" />
+        <label class="for-dropdown" for="dropdown"><i class="far fa-bell bell__icon"></i></label>
+        <div class="section-dropdown">
+          {{#each user.announcement}}
+          <a class="notice_tag" href="{{this.destination}}">
+            <i class="fas fa-{{this.icon}} {{this.icon}}_icon"></i>
+            <div class="notice__container">
+              <p>{{this.title}}</p>
+              <span>{{this.time}}</span>
+            </div>
+          </a>
+          {{/each}}
+        </div>
+      </div>
+    </button>
+    <li><a class="header__nav-item" style="margin-right: 20px;" href="/user/{{user._id}}">XIN CHÀO :
+        {{user.username}}</a></li>
+    {{else}}
+    <li><a class="header__nav-item" href="/login">ĐĂNG NHẬP</a></li>
+    <li><a class="header__nav-item" href="/register">ĐĂNG KÝ</a></li>
+    {{/if}}
+  </ul>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io();
+
+  try{
+    var bellAmount = document.getElementsByClassName("bell_amount")[0]
+    var bellIcon = document.getElementsByClassName("bell__icon")[0]
+
+    bellIcon.addEventListener("click", ()=>{
+      bellAmount.style.display = "none";
+      socket.emit("readNotice", "{{user._id}}")
+    })
+
+    socket.on("UpdateIsNew", username => {
+      console.log(username)
+      if(username == "{{user.username}}"){
+        console.log(username)
+        bellAmount.style.display = "inline";
+        socket.emit("ResultUpdateIsNew", true, username)
+      }
+    })
+  }
+  catch(err){
+    console.log(err)
+  }
+
+
+  document.getElementsByClassName("header__nav-item")[{{ activePage }}].classList.add("header__nav-click")
+
+</script>

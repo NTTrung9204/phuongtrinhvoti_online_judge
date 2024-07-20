@@ -1,0 +1,32 @@
+<link rel="stylesheet" href="./../../../../css/admin.css">
+<link rel="stylesheet" href="../../css/member.css">
+<div class="result">
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    <a class="createAnnouncement" href="./topListAssignment/create">Tạo</a>
+                    STT
+                </th>
+                <th>Tên dạng</th>
+                <th>Mã dạng</th>
+                <th>Liệt kê</th>
+                <th>Chức năng</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each topListAssignment}}
+            <tr>
+                {{#condition @index 0}}
+                {{else}}
+                <td>{{@index}}</td>
+                <td>{{../this.nameType}}</td>
+                <td>{{../this.Type}}</td>
+                <td><a href="topListAssignment/{{../this.Type}}/assignment">Chi tiết</a></td>
+                <td><a href="topListAssignment/{{../this._id}}/update">Chỉnh sửa</a></td>
+                {{/condition}}
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

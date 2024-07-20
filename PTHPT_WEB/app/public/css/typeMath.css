@@ -1,0 +1,347 @@
+#TypeMathFomula {
+    width: 1300px;
+    padding: 10px;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    height: 600px;
+    overflow: hidden;
+    box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.4);
+    transition: all 0.5s;
+    background-color: #fff;
+}
+
+#SolutionFormInput {
+    padding: 100px 10px 5px 5px;
+    position: relative;
+    flex: 1.25;
+    overflow-x: auto;
+    overflow-x: -moz-scrollbars-none;
+    -ms-overflow-style: none;
+    background-color: #fff;
+    border-right: 2px solid black;
+}
+
+#SolutionFormInput::-webkit-scrollbar {
+    width: 0 !important;
+    display: none;
+}
+
+#SolutionFormOutput {
+    position: relative;
+    flex: 1;
+    padding: 5px;
+    overflow-x: auto;
+    overflow-x: -moz-scrollbars-none;
+    -ms-overflow-style: none;
+    background-color: #fff;
+}
+
+#SolutionFormOutput::-webkit-scrollbar {
+    width: 0 !important;
+    display: none;
+}
+
+.FormLaTexInput {
+    all: unset;
+    border: 2px solid #75EC75;
+    min-height: 10px;
+    border-radius: 10px;
+    padding: 10px;
+    flex: 1;
+    background-color: #75ec750e;
+    box-shadow: 0px 0px 10px 0px #75ec7533;
+    transition: all 0.5s;
+}
+
+.FormLaTexInput:hover{
+    background-color: #75ec753a;
+}
+
+.ToolBarMathFomula {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 710px;
+    background-color: #fff;
+    z-index: 1;
+}
+
+.CreateNewFormLaTexOrFormInput {
+    position: relative;
+    height: 20px;
+    opacity: 0;
+    transition: all 0.5s;
+}
+
+.CreateNewFormLaTexOrFormInput:hover {
+    opacity: 1;
+}
+
+.CreateNewFormLaTexOrFormInput::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: chocolate;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.NewFormLaTex {
+    all: unset;
+    padding: 5px;
+    border: 1px solid chocolate;
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    background-color: white;
+    left: 30%;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.NewFormLaTex>span {
+    position: relative;
+    z-index: 1;
+    color: chocolate;
+}
+
+.NewFormLaTex::after {
+    content: "";
+    display: block;
+    position: absolute;
+    background-color: rgba(210, 105, 30, 0.234);
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    clip-path: circle(0% at 50% 50%);
+    transition: all 0.7s;
+}
+
+.NewFormLaTex:hover::after {
+    clip-path: circle(100% at 50% 50%);
+}
+
+.NewFormInput {
+    all: unset;
+    padding: 5px;
+    border: 1px solid chocolate;
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    background-color: white;
+    right: 30%;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.NewFormInput>span {
+    position: relative;
+    z-index: 1;
+    color: chocolate;
+}
+
+.NewFormInput::after {
+    content: "";
+    display: block;
+    position: absolute;
+    background-color: rgba(210, 105, 30, 0.234);
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    clip-path: circle(0% at 50% 50%);
+    transition: all 0.7s;
+}
+
+.NewFormInput:hover::after {
+    clip-path: circle(100% at 50% 50%);
+}
+
+.FormTextInput {
+    all: unset;
+    padding: 5px 10px;
+    height: 40px;
+    line-height: 40px;
+    border: 2px solid purple;
+    border-radius: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    flex: 1;
+    background-color: rgba(128, 0, 128, 0.1);
+    box-shadow: 0px 0px 10px 0px rgba(128, 0, 128, 0.2);
+    transition: all 0.5s;
+}
+
+.FormTextInput:hover{
+    background-color: rgba(128, 0, 128, 0.3);
+}
+
+.ImageOutput {
+    display: block;
+    margin: 10px auto;
+}
+
+.squaredFour {
+    width: 20px;
+    height: 20px;
+    background-color: aqua;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    z-index: 1000;
+}
+
+.FormLaTex{
+    display: flex;
+    transition: all 0.5s;
+}
+
+.FormLaTex:hover .DeleteIcon{
+    right: 0;
+    opacity: 0.5;
+}
+
+.DeleteIcon{
+    width: 40px;
+    height: 40px;
+    background-color: red;
+    cursor: pointer;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    font-size: 20px;
+    margin-left: 5px;
+    transition: all 0.5s;
+    opacity: 0;
+    color: white;
+    position: relative;
+    right: 100px;
+    z-index: 0;
+}
+
+.DeleteIcon:hover{
+    opacity: 1 !important;
+    transform: rotate(360deg);
+}
+
+.FormInput{
+    display: flex;
+    transition: all 0.5s;
+}
+
+.FormInput:hover .DeleteIcon{
+    right: 0;
+    opacity: 0.5;
+}
+
+.FormInput .SymbolIcon{
+    width: 40px;
+    height: 40px;
+    background-color: purple;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    font-size: 20px;
+    margin-right: 5px;
+    color: white;
+}
+
+.FormLaTex .SymbolIcon{
+    width: 40px;
+    height: 40px;
+    background-color: #75EC75;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    font-size: 20px;
+    margin-right: 5px;
+    color: black;
+}
+
+.scaleElement{
+    transform: scale(0);
+    position: absolute;
+}
+
+#download{
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.5s;
+    color: black;
+    border-radius: 50%;
+}
+
+#download:hover{
+    background-color: #75EC75;
+    
+}
+
+.listOptionProblem{
+    position: absolute;
+    width: 1300px;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 10px;
+    z-index: 1;
+}
+
+.listOptionProblem > button{
+    all: unset;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #FF8282;
+    color: black;
+    transition: all 0.5s;
+}
+
+#buttonSubmitLatex:hover{
+    background-color: #7F007F;
+    cursor: pointer;
+    color: white;
+}
+
+#hidenNotebook:hover{
+    background-color: #f7ef00;
+    cursor: pointer;
+}
+
+.buttonActive{
+    background-color: #75EC75 !important;
+}
+
+.buttonDisable{
+    background-color: #ccc !important;
+    cursor: not-allowed !important;
+}
+
+.backGroundSolutionFormInput{
+    opacity: 0;
+    visibility: hidden;
+    z-index: -1;
+    transition: all 0.5s;
+    background-color: #00000079;
+}

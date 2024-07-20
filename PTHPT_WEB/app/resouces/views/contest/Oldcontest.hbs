@@ -1,0 +1,51 @@
+<link rel="stylesheet" href="/css/Oldcontest.css">
+
+<div class="result">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Họ và tên</th>
+                {{#each ContestProblem.problems}}
+                <th>Điểm bài {{PlusOne @index}}</th>
+                {{/each}}
+                <th>Kết quả</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each ContestProblem.participants}}
+            <tr>
+                <td>{{PlusOne @index}}</td>
+                <td><a style="color: {{this.color}}; font-weight: {{this.fontWeight}};" href="/user/{{this.idALC}}">{{this.username}}</a></td>
+                {{#each this.listScore}}
+                <td>{{this}}</td>
+                {{/each}}
+                <td>{{this.totalScore}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+<div class="problem">
+    {{#each ContestProblem.problems}}
+    <a class="directPage" href="{{../idContest}}/{{@index}}">
+        <div class="content_solve">
+            <div class="content__main">
+                <p class="content__main-title" style="background-color: #76ee76">Bài toán {{PlusOne @index}}
+                    <i class="fas fa-check-circle" style="color: #000000; transform: translateY(-3px);"></i>
+
+                </p>
+                <p style="margin-right: -40px;" class="content__main-score">{{this.score}} điểm</p>
+                <div class="content__main-topic">
+                    <ul class="content__main-list">
+                        <li class="content__main-list__item">
+                            <p class="list__text-topic">{{this.context}}</p>
+                            {{{this.problem}}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </a>
+    {{/each}}
+</div>

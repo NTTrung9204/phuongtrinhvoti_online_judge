@@ -1,0 +1,285 @@
+<link rel="stylesheet" href="../css/announcement.css">
+<div class="container">
+    <div class="content">
+        <div class="content__main">
+            <p class="content__main-title">
+                {{announcement.title}}
+            </p>
+            <p class="content__main-time">1 ngày trước</p>
+            <p class="content__main-desc">
+                {{{announcement.description}}}
+                <img class="content__main-img"
+                    src="https://khoinguonsangtao.vn/wp-content/uploads/2022/07/avatar-gau-cute.jpg" alt="">
+                {{{announcement.description}}}
+                <img class="content__main-img"
+                    src="https://khoinguonsangtao.vn/wp-content/uploads/2022/07/avatar-gau-cute.jpg" alt="">
+            </p>
+            <div class="content__main-gradient">
+
+            </div>
+
+
+            <button class="content__main-button" type="button">
+                xem thêm...
+            </button>
+            <div class="content__main-tool">
+                <i class="far fa-thumbs-up like"> Like</i>
+                <i class="far fa-comment-alt comment"> Comment</i>
+                <i class="fas fa-share share"> Share</i>
+            </div>
+            <div class="comment__text">
+                <form method="post" enctype="multipart/form-data" id="commentMain">
+                    <textarea class="comment__individual" type="text" name="comment" placeholder=" "></textarea>
+                    <label class="comment__focus" for="comment">Comment</label>
+                    <div class="comment__tool">
+                        <i class="comment__tool-img fas fa-images"></i>
+                        <input class="comment__tool-img-click" type="file" name="myImage">
+                        
+                        <button type="submit" form="commentMain"><i
+                                class="comment__tool-send far fa-paper-plane"></i></button>
+                    </div>
+                </form>
+            </div>
+            {{#each announcement.comment}}
+            {{#condition this.deleteAt 0}}
+            <div class="comment__user">
+                <div>
+                    <img class="comment__user-avatar"
+                        src="https://khoinguonsangtao.vn/wp-content/uploads/2022/07/avatar-gau-cute.jpg" alt="" />
+                </div>
+                <div class="comment__user-block">
+                    <p class="comment__user-name">{{../this.au}}</p>
+                    <p class="comment__user-text">
+                        {{{../this.cmt}}}
+                    </p>
+                    <img class="comment__user-image" src="/img/{{../this.image}}" alt="">
+                    <form method="post" action="./like/{{../../announcement._id}}/{{../this.cmt_id}}/123"
+                        id="like{{../this.cmt_id}}">
+                    </form>
+                    <button class="comment__user-like" type="submit"
+                        form="like{{../this.cmt_id}}">Like({{../this.likes}})</button>
+                    <button class="comment__user-btn" type="button">Trả lời</button>
+
+                    <div class="comment__text-reply">
+                        <form method="post" enctype="multipart/form-data" id="{{../this.cmt_id}}">
+                            <input style="display: none;" type="text" name="cmt_id" value="{{../this.cmt_id}}">
+                            <textarea class="comment__individual" type="text" name="comment" placeholder=" "></textarea>
+                            <label class="comment__focus" for="comment">Comment</label>
+                            <div class="comment__tool">
+                                <i class="comment__tool-img fas fa-images"></i>
+                                <input class="comment__tool-img-click" type="file" name="myImage" accept="image/*">
+                                <button type="submit" form="{{../this.cmt_id}}"><i
+                                        class="comment__tool-send far fa-paper-plane"></i></button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="comment__user-see"><i class="fas fa-chevron-down"></i> Xem phản hồi</div>
+                    <div class="comment__user-nosee dp-n"><i class="fas fa-chevron-up"></i> Thu hồi phản hồi</div>
+
+                    <div class="reply__all dp-n">
+                        {{#each ../this.commentChild}}
+                        {{#condition this.deleteAt 0}}
+                        <div class="reply">
+                            <i class="fas fa-reply fa-rotate-180 reply-icon"></i>
+                            <div>
+                                <img class="reply-avatar"
+                                    src="https://khoinguonsangtao.vn/wp-content/uploads/2022/07/avatar-gau-cute.jpg"
+                                    alt="" />
+                            </div>
+                            <div class="reply-block">
+                                <p class="reply-name">{{../this.au}}</p>
+                                <p class="reply-text">{{../this.cmt}}</p>
+                                <img class="comment__user-image" src="/img/{{../this.image}}" alt="">
+                                <form method="post"
+                                    action="./like/{{../../../../announcement._id}}/{{../../../this.cmt_id}}/{{../this.cmtChild_id}}"
+                                    id="like{{../this.cmtChild_id}}">
+                                    <button class="comment__user-like" type="submit"
+                                        form="like{{../this.cmtChild_id}}">Like({{../this.likes}})</button>
+                                </form>
+                            </div>
+                            {{#condition ../this.au ../../../../user}}
+                            <i class="reply__user-dots fas fa-ellipsis-h">
+                                <div class="reply__user-dots-click dp-n">
+                                    <div class="reply-dots-arrow">
+                                    </div>
+                                    <div class="reply-dots-list">
+                                        <div class="reply-dots-list__item">
+                                            <form method="post"
+                                                action="./delete/{{../../../../announcement._id}}/{{../../../this.cmt_id}}/{{../this.cmtChild_id}}"
+                                                id="{{../this.cmtChild_id}}">
+                                                <button type="submit" form="{{../this.cmtChild_id}}">Xóa bình
+                                                    luận</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </i>
+                            {{/condition}}
+                        </div>
+                        {{/condition}}
+                        {{/each}}
+                    </div>
+                </div>
+                {{#condition ../this.au ../../user}}
+                <i class="comment__user-dots fas fa-ellipsis-h">
+                    <div class="comment__user-dots-click dp-n">
+                        <div class="dots-arrow">
+                        </div>
+                        <div class="dots-list">
+                            <form method="post" action="./delete/{{../../announcement._id}}/{{../this.cmt_id}}/123"
+                                id="del{{../this.cmt_id}}">
+                                <button type="submit" form="del{{../this.cmt_id}}">Xóa bình
+                                    luận</button>
+                            </form>
+                        </div>
+                    </div>
+                </i>
+                {{/condition}}
+            </div>
+            {{/condition}}
+            {{/each}}
+            <i class="fas fa-volume-up content__main-icon"></i>
+        </div>
+    </div>
+</div>
+<script>
+    var buttonContent = document.querySelector('.content__main-button');
+
+    var elementDesc = document.querySelector('.content__main-desc');
+
+    var elementBackgroundgradient = document.querySelector('.content__main-gradient');
+
+    var specificHeight = 450;
+
+    if (elementDesc.clientHeight < specificHeight) {
+        console.log(elementDesc.clientHeight);
+        buttonContent.classList.toggle('dp-n');
+    }
+
+    function activeContentMain() {
+        elementDesc.classList.add('content__main-active');
+        elementBackgroundgradient.classList.add('dp-n');
+    }
+
+    buttonContent.addEventListener('click', () => {
+        activeContentMain();
+        buttonContent.style.display = "none";
+    })
+
+    document.querySelector('.comment__tool-img').addEventListener('click', function () {
+        console.log(1);
+        document.querySelector('.comment__tool-img-click').click();
+    })
+
+    var elementReplytoolimg = document.getElementsByClassName('comment__tool-reply-img');
+
+    var elementReplytoolimgclick = document.getElementsByClassName('comment__tool-reply-img-click');
+
+    for (let i = 0; i < elementReplytoolimg.length; i++) {
+        elementReplytoolimg[i].addEventListener('click', function () {
+            elementReplytoolimgclick[i].click();
+        })
+    }
+
+
+    var buttonReply = document.getElementsByClassName('comment__user-btn');
+
+    var elementReply = document.getElementsByClassName('comment__text-reply');
+
+    for (let i = 0; i < buttonReply.length; i++) {
+        buttonReply[i].addEventListener('click', () => {
+            console.log[i];
+            elementReply[i].style.display = "block";
+            buttonReply[i].style.display = "none";
+        })
+    }
+
+    var elementReplyall = document.getElementsByClassName('reply__all');
+
+    var elementReplysee = document.getElementsByClassName('comment__user-see');
+
+    var elementReplynosee = document.getElementsByClassName('comment__user-nosee');
+
+    for (let i = 0; i < elementReplysee.length; i++) {
+        elementReplysee[i].addEventListener('click', function () {
+            elementReplysee[i].classList.toggle('dp-n');
+            elementReplynosee[i].classList.toggle('dp-n');
+            elementReplyall[i].classList.toggle('dp-n');
+        })
+
+        elementReplynosee[i].addEventListener('click', function () {
+            elementReplysee[i].classList.toggle('dp-n');
+            elementReplynosee[i].classList.toggle('dp-n');
+            elementReplyall[i].classList.toggle('dp-n');
+        })
+    }
+
+
+    var heightTextarea = document.getElementsByClassName('comment__individual');
+
+    heightTextarea[0].addEventListener('input', function () {
+        this.style.height = 'auto';
+        this.style.height = this.scrollHeight + 'px';
+    })
+
+
+    var elementDots = document.getElementsByClassName('comment__user-dots');
+
+    var elementDotsclick = document.getElementsByClassName('comment__user-dots-click');
+
+    var elementDotsreply = document.getElementsByClassName('reply__user-dots');
+
+    var elementDotsreplyclick = document.getElementsByClassName('reply__user-dots-click');
+
+    var arrDots = [];
+
+    var arrDotsreply = [];
+
+    for (i = 0; i < elementDots.length; i++) {
+        arrDots.push(elementDots[i]);
+    }
+
+    for (i = 0; i < elementDotsreply.length; i++) {
+        arrDotsreply.push(elementDotsreply[i]);
+    }
+
+    for (let i = 0; i < elementDots.length; i++) {
+        elementDots[i].addEventListener('click', function () {
+            elementDotsclick[i].classList.toggle('dp-n');
+            for (let j = 0; j < elementDots.length; j++) {
+                if (j != i) {
+                    elementDotsclick[j].classList.add('dp-n');
+                }
+            }
+            for (let j = 0; j < elementDotsreply.length; j++) {
+                elementDotsreplyclick[j].classList.add('dp-n');
+            }
+        })
+    }
+
+    for (let i = 0; i < elementDotsreply.length; i++) {
+        elementDotsreply[i].addEventListener('click', function () {
+            elementDotsreplyclick[i].classList.toggle('dp-n');
+            for (let j = 0; j < elementDots.length; j++) {
+                elementDotsclick[j].classList.add('dp-n');
+            }
+            for (let j = 0; j < elementDotsreply.length; j++) {
+                if (j != i) {
+                    elementDotsreplyclick[j].classList.add('dp-n');
+                }
+            }
+        })
+    }
+
+    document.addEventListener('click', function (event) {
+        if (!arrDots.includes(event.target) && !arrDotsreply.includes(event.target)) {
+            for (let i = 0; i < elementDots.length; i++) {
+                elementDotsclick[i].classList.add('dp-n');
+            }
+            for (let i = 0; i < elementDotsreply.length; i++) {
+                elementDotsreplyclick[i].classList.add('dp-n');
+            }
+        }
+    })
+</script>

@@ -1,0 +1,228 @@
+<link rel="stylesheet" href="/css/assignment.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.7.0/nouislider.min.css">
+<section>
+    <p class="navbar__title"><i class="fas fa-scroll" style="margin-right:10px ;"></i>Danh mục</p>
+    <ul class="navbarBody">
+        {{#each topListAssignment}}
+        <li><a href="?type={{this.Type}}"
+                class="navbarBody__item {{#ifEquals ../arrActive @index}}navbarBody__item__active {{/ifEquals}}">{{this.nameType}}</a>
+        </li>
+        {{/each}}
+    </ul>
+
+
+    <div class="content">
+        {{#each assignment}}
+        <div class="outSideContent">
+            <a class="change_direct" href="/assignment/view/{{this._id}}">
+                <div class="content__main">
+                    {{#if this.isSolved}}
+                    <p style="color: #2dda2d;" class="content__main__title">{{this.title}} <i class="fas fa-check-circle"></i></p>
+                    {{else}}
+                    <p class="content__main__title">{{this.title}} <i class="fas fa-minus-circle"></i></p>
+                    {{/if}}
+                    <p class="content__main-score">{{this.score}} điểm</p>
+                    <p class="content__main-desc">
+                        {{this.content}} <br>
+                        {{{this.image}}} <br>
+                        {{#if this.sols}}
+                            Số lời giải: {{this.sols}}
+                        {{else}}
+                            Chưa có lời giải nào!
+                        {{/if}}
+                    </p>
+                </div>
+            </a>
+        </div>
+        {{/each}}
+    </div>
+
+    <div class="sideBarRight">
+        <p class="sideBarRight__header"><i class="fas fa-search searchIcon"></i>Lọc các bài toán</p>
+        <p style="margin:10px" class="sideBarRight__header">Lựa chọn</p>
+        <button data-type="" class="sideBarOption">Ẩn các bài đã giải <i class="far fa-times-circle"
+                style="color: #000000;"></i></button>
+        <div class="sidebarOptionSelection">
+            <button data-type="hardestFrist" class="sideBarOption__item">Khó nhất trước <i class="far fa-times-circle"
+                    style="color: #000000;"></i></button>
+            <button data-type="easyestFrist" class="sideBarOption__item">Dễ nhất trước <i class="far fa-times-circle"
+                    style="color: #000000;"></i></button>
+            <button data-type="lastestFrist" class="sideBarOption__item">Mới nhất trước <i class="far fa-times-circle"
+                    style="color: #000000;"></i></button>
+            <button data-type="popularFrist" class="sideBarOption__item">Phổ biến nhất <i class="far fa-times-circle"
+                    style="color: #000000;"></i></button>
+        </div>
+        <p style="margin:10px" class="sideBarRight__header">Mốc điểm</p>
+        <div id="slider"></div>
+        <div id="slider-value"></div>
+        <div class="sideBarSeperate"></div>
+        <div class="sideBarResult">
+            <button id="filter" class="sideBarButton"><i class="fas fa-spinner" style="color: #000000;"></i>
+                Lọc</button>
+            <button class="sideBarButton"><i class="fas fa-dice" style="color: #000000;"></i> Ngẫu nhiên</button>
+        </div>
+    </div>
+
+</section>
+<div style="display:flex">
+    <div class="pagination pagination-style-three m-t-20 m-b-40">
+        {{#each paginationLoop}}
+        <a href="/assignment/{{@index}}" class="{{#condition this ../page}}selected{{/condition}}">{{this}}</a>
+        {{/each}}
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.7.0/nouislider.min.js"></script>
+<script>
+    var slider = document.getElementById('slider');
+    var sliderValueElement = document.getElementById('slider-value');
+
+    noUiSlider.create(slider, {
+        start: [0, {{ maxScore }}],
+        connect: true,
+        range: {
+        'min': 0,
+        'max': {{ maxScore }}
+        }
+    });
+
+    slider.noUiSlider.on('update', function (values, handle) {
+        // values là một mảng chứa giá trị bắt đầu và kết thúc
+        startValue = parseInt(values[0]);
+        endValue = parseInt(values[1]);
+
+        // Hiển thị giá trị lên màn hình
+        sliderValueElement.innerHTML = 'Từ ' + startValue + ' Đến ' + endValue;
+    });
+
+    // Hàm để thêm tham số vào URL
+    function updateQueryStringParameter(key, value) {
+
+
+        // Kiểm tra xem URL đã có tham số chưa
+        separator = currentUrl.indexOf('?') !== -1 ? '&' : '?';
+
+        // Thêm tham số mới vào URL
+        if (newUrl) {
+            newUrl += separator + key + '=' + encodeURIComponent(value);
+        }
+        else {
+            newUrl = currentUrl + separator + key + '=' + encodeURIComponent(value);
+            currentUrl = newUrl
+        }
+
+
+    }
+
+    // Sử dụng hàm để thêm tham số 'example' với giá trị '123' vào URL
+    // appendQueryParameter('example', '123');
+
+    var sideBarOption = document.getElementsByClassName("sideBarOption")[0]
+    sideBarOption.addEventListener("click", () => {
+        sideBarOption.classList.toggle("navbarBody__item__active")
+        replaceIcon(sideBarOption.children[0])
+        if (sideBarOption.classList.contains("navbarBody__item__active")) {
+            sideBarOption.setAttribute("data-type", "hideSolved")
+        }
+        else {
+            sideBarOption.setAttribute("data-type", "")
+        }
+    })
+
+    var sideBarOption__item = document.getElementsByClassName("sideBarOption__item")
+    for (let i = 0; i < sideBarOption__item.length; i++) {
+        sideBarOption__item[i].addEventListener("click", () => {
+            for (let j = 0; j < sideBarOption__item.length; j++) {
+                sideBarOption__item[j].classList.remove("navbarBody__item__active")
+            }
+            sideBarOption__item[i].classList.toggle("navbarBody__item__active");
+            for (let j = 0; j < sideBarOption__item.length; j++) {
+                resetIcon(sideBarOption__item[j].children[0])
+            }
+            replaceIcon(sideBarOption__item[i].children[0])
+        })
+    }
+
+
+
+    function resetIcon(iconTarget) {
+        if (iconTarget.classList.contains('fa-check-circle')) {
+            iconTarget.classList.remove('fa-check-circle')
+            iconTarget.classList.add('fa-times-circle');
+        }
+
+    }
+
+    function replaceIcon(iconTarget) {
+        if (iconTarget.classList.contains('fa-times-circle')) {
+            iconTarget.classList.remove('fa-times-circle');
+            iconTarget.classList.add('fa-check-circle');
+        }
+        else {
+            iconTarget.classList.remove('fa-check-circle');
+            iconTarget.classList.add('fa-times-circle');
+        }
+    }
+
+    var filter = document.getElementById("filter")
+    filter.addEventListener("click", () => {
+        newUrl = ""
+
+        // Lấy URL hiện tại
+        currentUrl = window.location.href;
+
+        var urlParts = currentUrl.split('?');
+        if (urlParts.length > 1) {
+            // Lấy phần truy vấn
+            var queryString = urlParts[1];
+
+            // Chia các tham số truy vấn
+            var queryParams = queryString.split('&');
+
+            // Lặp qua các tham số và giữ lại tham số có tên "type"
+            var filteredParams = queryParams.filter(function (param) {
+                return param.startsWith('type='); // Giữ lại tham số có tên "type"
+            });
+
+            filteredParams = filteredParams.join('&')
+            filteredParams = filteredParams.split('=')
+        }
+
+        // Tìm vị trí của ký tự "?" trong URL
+        indexOfQuestionMark = currentUrl.indexOf('?');
+
+        // Nếu có tham số truy vấn trong URL
+        if (indexOfQuestionMark !== -1) {
+            // Cắt chuỗi từ đầu đến ký tự "?" để loại bỏ tham số truy vấn cũ
+            currentUrl = currentUrl.substring(0, indexOfQuestionMark);
+        }
+
+        var option = document.getElementsByClassName("navbarBody__item__active")
+        option = option[option.length - 1]
+
+        updateQueryStringParameter('hideSolved', sideBarOption.getAttribute("data-type"));
+        updateQueryStringParameter('option', option.getAttribute("data-type"));
+        updateQueryStringParameter('minPoint', startValue);
+        updateQueryStringParameter('maxPoint', endValue);
+        try {
+            updateQueryStringParameter(filteredParams[0], filteredParams[1]);
+        }
+        catch {
+
+        }
+
+        // Chuyển hướng đến URL mới
+        window.location.href = newUrl;
+    })
+
+    var sideBarButton = document.getElementsByClassName("sideBarButton")[1]
+    var change_direct = document.getElementsByClassName("change_direct")
+    
+    sideBarButton.addEventListener("click", ()=>{
+        const randomObject = change_direct[Math.floor(Math.random() * change_direct.length)];
+        const randomUrl = randomObject.getAttribute("href")
+        window.open(randomUrl, '_blank');
+    })
+
+</script>

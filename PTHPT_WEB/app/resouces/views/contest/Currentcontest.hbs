@@ -1,0 +1,445 @@
+<link rel="stylesheet" href="/css/Currentcontest.css">
+<script src="https://editor.codecogs.com/eqneditor.api.min.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/css/reset.css">
+<link rel="stylesheet" href="/css/typeMath.css">
+<script src="https://kit.fontawesome.com/1be0d07f21.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<div id="overlay" class="overlay">
+    <div id="popup" class="popup">
+        <a href="/contest" class="headerAnnouncement">
+            Chấp nhận
+        </a>
+        <div class="footerAnnouncement">
+            Thông báo!
+        </div>
+        <p>Bạn đã bị đình chỉ do vi phạm quy chế thi</p>
+        <p>Mọi thắc mắc xin vui lòng liên hệ với quản trị viên</p>
+    </div>
+</div>
+<div class="backGroundSolutionFormInput" style="position: fixed; left: 0; bottom: 0; right: 0; top: 0">
+    <div id="TypeMathFomula">
+        <div id="SolutionFormInput">
+
+            <div id="TrungDZaiVoDich" class="CreateNewFormLaTexOrFormInput">
+                <button onclick="CreateElementLatex(this.parentNode.id)" class="NewFormLaTex">
+                    <span><i class="fa-solid fa-circle-plus"></i> New LaTex</span>
+                </button>
+                <button onclick="CreateElementInput(this.parentNode.id)" class="NewFormInput">
+                    <span><i class="fa-solid fa-circle-plus"></i> New Sentence</span>
+                </button>
+            </div>
+
+            <div class="ToolBarMathFomula" id="toolbar"></div>
+            <div class="FormLaTex" id="FristFormLaTex">
+                <div class="SymbolIcon">
+                    <i class="fas fa-square-root-alt"></i>
+                </div>
+                <div class="FormLaTexInput" id="latexInput"></div>
+                <div class="DeleteIcon">
+                    <i class="fa-solid fa-trash"></i>
+                </div>
+            </div>
+
+            <div id="NTTrung9204" class="CreateNewFormLaTexOrFormInput">
+                <button onclick="CreateElementLatex(this.parentNode.id)" class="NewFormLaTex">
+                    <span><i class="fa-solid fa-circle-plus"></i> New LaTex</span>
+                </button>
+                <button onclick="CreateElementInput(this.parentNode.id)" class="NewFormInput">
+                    <span><i class="fa-solid fa-circle-plus"></i> New Sentence</span>
+                </button>
+            </div>
+        </div>
+        <div id="SolutionFormOutput">
+            <img class="ImageOutput" id="latexInputOutput" />
+            <a id="download" onclick="doCapture()">
+                <i class="fas fa-download"></i>
+            </a>
+        </div>
+    </div>
+    <div class="listOptionProblem">
+        {{#each ContestProblem.problems}}
+        <button class="itemOptionProblem">Bài toán {{PlusOne @index}}</button>
+        {{/each}}
+        <button id="buttonSubmitLatex">Nộp bài</button>
+        <form style="display: none;" method="post" id="submitFormLatex" action="submit/{{ContestProblem._id}}">
+            <input name="solution" style="display: none;" id="inputSubmitFormLatex" type="text">
+            <input style="display: none;" name="Index" type="text" id="idSubmitFormLatex">
+        </form>
+        <button id="hidenNotebook">Ẩn Notebook</button>
+    </div>
+</div>
+<style>
+        @media print {
+            body {
+                display: none;
+            }
+        }
+</style>
+<div class="body">
+    <div class="content__block">
+        {{#each ContestProblem.problems}}
+        <div data-index="{{@index}}" class="{{#ifEquals ../listSolved @index}}content_solve{{else}}content{{/ifEquals}}">
+            <div class="content__main">
+                <p class="content__main-title" {{#ifEquals ../listSolved @index}} style="background-color: #90EE90;"
+                    {{/ifEquals}}>Bài toán {{PlusOne @index}}
+                    {{#ifEquals ../listSolved @index}}
+
+                    <i class="fas fa-check-circle" style="color: #000000; transform: translateY(-3px);"></i>
+
+                    {{else}}
+
+                    <i class="fas fa-times-circle" style="transform: translateY(-3px);"></i>
+
+                    {{/ifEquals}}
+
+                </p>
+                <p class="content__main-score">100 điểm</p>
+                <div class="content__main-topic">
+                    <ul class="content__main-list">
+                        <li class="content__main-list__item">
+                            <p class="list__text-topic">{{this.context}}</p>
+                            {{{this.problem}}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            {{#ifEquals ../listSolved @index}}
+
+            {{else}}
+
+            <button type="submit" form="{{../this.problem}}" onclick="SubmitAt({{@key}})" class="button_submit">Nộp
+                bài</button>
+            <form enctype="multipart/form-data" method="post" action="submit/{{../../ContestProblem._id}}"
+                id="{{../this.problem}}">
+                <input style="display: none;" name="Index" type="text" value="{{@key}}">
+                <div class="submitImage">
+                    <div class="inputImage">
+                        <label for="fileInput" class="custom-file-input">
+                            <input name="imageSubmit" class="imageCheckOnchange" type="file" id="fileInput"
+                                accept="image/*">
+                            <span class="file-label">Trang thứ nhất</span>
+                        </label>
+                    </div>
+                    <div class="inputImage">
+                        <label for="fileInput" class="custom-file-input">
+                            <input name="imageSubmit" class="imageCheckOnchange" type="file" id="fileInput"
+                                accept="image/*">
+                            <span class="file-label">Trang thứ hai</span>
+                        </label>
+                    </div>
+                    <div class="inputImage">
+                        <label for="fileInput" class="custom-file-input">
+                            <input name="imageSubmit" class="imageCheckOnchange" type="file" id="fileInput"
+                                accept="image/*">
+                            <span class="file-label">Trang thứ ba</span>
+                        </label>
+                    </div>
+                </div>
+            </form>
+            {{/ifEquals}}
+        </div>
+        {{/each}}
+    </div>
+    <div class="information">
+        <div class="sideBarright">
+            <div style="padding-top: 25px;" class="top">
+                {{!-- <p class="top__title">Thông tin kì thi</p> --}}
+                <div class="top__information">
+                    <div class="top__information-row">
+                        <p class="top__information-text">Số lượng thí sinh</p>
+                        <i class="top__information-img fas fa-arrow-right"></i>
+                        <p class="top__information-quantity__pp top__information-hover">
+                            {{ContestProblem.AmountAttendee}}
+                        </p>
+                        <div class="number-bt dp-n">
+                            {{#each Statistic}} {{this}}- {{/each}}
+                        </div>
+                    </div>
+                    <div class="top__information-row">
+                        <p class="top__information-text">Thời gian làm bài</p>
+                        <i class="top__information-img fas fa-arrow-right"></i>
+                        <p class="top__information-time top__information-hover count-end">
+                            {{ContestProblem.timeTotal}}
+                        </p>
+                    </div>
+                    <div class="top__information-row">
+                        <p class="top__information-text">Thời gian bắt đầu</p>
+                        <i class="top__information-img fas fa-arrow-right"></i>
+                        <p class="top__information-timeend top__information-hover">
+                            {{ContestProblem.timeStart}}
+                        </p>
+                    </div>
+                    <div class="top__information-row">
+                        <p class="top__information-text">Số lượng bài tập</p>
+                        <i class="top__information-img fas fa-arrow-right"></i>
+                        <p class="top__information-quantity__bt top__information-hover">
+                            {{ContestProblem.AmountProblem}}
+                        </p>
+                    </div>
+                    <div style="width: 400px; height: 300px; margin: 0 auto;">
+
+                        <canvas id="myChart" width="400" height="300"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="countdown-time">
+                <div class="countdown-time__block">
+                    <p class="countdown-time__title count"></p>
+                </div>
+                <div class="value">
+                    <div class="value__countdown">
+                        <img class="value__img" src="/gif/fire2.gif" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var Count = document.querySelector('.count');
+    var Countend = document.querySelector('.count-end');
+    Count.innerHTML = Countend.textContent;
+    const timeend = Countend.textContent;
+    const hourend = parseInt(timeend.split(":")[0]);
+    const minuteend = parseInt(timeend.split(":")[1]);
+    const secondend = parseInt(timeend.split(":")[2]);
+    var value = document.querySelector('.value');
+    var valueCountdown = document.querySelector('.value__countdown');
+
+    var chartItemBlock = document.getElementsByClassName('chart__item-block');
+    var quantitypp = document.querySelector('.top__information-quantity__pp');
+    let Soluong = parseInt(quantitypp.textContent);
+    var numberBt = document.querySelector('.number-bt').textContent;
+    for (let i = 0; i < chartItemBlock.length; ++i) {
+        chartItemBlock[chartItemBlock.length - 1 - i].style.height = (parseInt(numberBt.split("-")[i]) / Soluong) * 100 + "%";
+        currentHeight = chartItemBlock[chartItemBlock.length - 1 - i].style.height
+        console.log(currentHeight)
+        chartItemBlock[chartItemBlock.length - 1 - i].style.height = "calc(" + currentHeight + " - 15px)";
+
+    }
+
+
+    var chartPercenttext = document.getElementsByClassName('chart__percent-text');
+
+    for (let i = 0; i < chartPercenttext.length; ++i) {
+        if (Soluong > 20) {
+            chartPercenttext[i].innerHTML = ((Soluong / 100) * ((chartPercenttext.length - (i)) * 10)).toFixed(0);;
+        }
+        else {
+            if (i % 2 == 0) {
+                chartPercenttext[i].innerHTML = ((Soluong / 100) * ((chartPercenttext.length - (i)) * 10)).toFixed(0);;
+            }
+        }
+    }
+
+    var taskNumber = document.querySelector('.task-number');
+    let countTask = chartItemBlock.length;
+    var addtask = "<p class='task-number__item'>Số lượng</p>";
+    var addtasks = "<p class='task-number__item'>Bai ";
+    var addtaske = "</p>";
+    for (let i = 1; i < countTask + 1; ++i) {
+        addtask += addtasks + i + addtaske;
+    }
+
+
+    var chartItem = document.getElementsByClassName('chart__item');
+
+    let setWidth = 100 / (chartItem.length);
+    for (let i = 0; i < chartItem.length; ++i) {
+        chartItem[i].style.width = setWidth + "%";
+    }
+
+    var taskNumberitem = document.getElementsByClassName('task-number__item');
+    for (let i = 0; i < taskNumberitem.length; ++i) {
+        taskNumberitem[i].style.width = setWidth + "%";
+    }
+
+    var ContentEffect = document.getElementsByClassName("content")
+    var SubmitButton = document.getElementsByClassName("button_submit")
+    var ImageInput = document.getElementsByClassName("submitImage")
+    var ListImage = document.getElementsByClassName("imageCheckOnchange")
+    var labelImage = document.getElementsByClassName("file-label")
+    for (let index = 0; index < ContentEffect.length; index++) {
+        ContentEffect[index].addEventListener("click", () => {
+            /*
+            ContentEffect[index].classList.toggle("content_effect")
+            SubmitButton[index].classList.toggle("button_effect")
+            ImageInput[index].classList.toggle("ImageInput_effect")
+            */
+            const backGroundSolutionFormInput = document.getElementsByClassName("backGroundSolutionFormInput")[0];
+            const idSubmitFormLatex = document.getElementById("idSubmitFormLatex");
+            backGroundSolutionFormInput.style.opacity = "1";
+            backGroundSolutionFormInput.style.zIndex = "10";
+            backGroundSolutionFormInput.style.visibility = "visible";
+            const Index = ContentEffect[index].getAttribute("data-index")
+            idSubmitFormLatex.value = Index
+            const listOptionProblem = document.getElementsByClassName("itemOptionProblem")
+            for (let index = 0; index < listOptionProblem.length; index++) {
+                listOptionProblem[index].classList.remove("buttonActive")
+            }
+            listOptionProblem[Index].classList.add("buttonActive")
+        })
+    }
+    for (let index = 0; index < SubmitButton.length; index++) {
+        SubmitButton[index].addEventListener("click", (e) => {
+
+            e.stopPropagation()
+        })
+    }
+    for (let index = 0; index < ListImage.length; index++) {
+        ListImage[index].addEventListener("click", (e) => {
+
+            e.stopPropagation()
+        })
+        ListImage[index].addEventListener("change", (e) => {
+            labelImage[index].innerHTML = `Hoàn tất <i class="fas fa-check-circle" style="color: #000000;"></i>`
+            labelImage[index].style.backgroundColor = "#90EE90"
+        })
+    }
+
+    var socket = io();
+    socket.emit('connection', socket.id);
+
+    socket.on('time', (StringTime, PercentTime) => {
+        Count.innerHTML = StringTime
+        valueCountdown.style.width = PercentTime;
+    })
+
+    socket.on('updateContestReload', value => {
+        if (value) {
+            location.reload();
+        }
+    })
+
+    var overlay = document.getElementById("overlay");
+    var popup = document.getElementById("popup");
+    socket.on('banUsername', username => {
+        if ("{{ user.username }}" == username){
+            overlay.style.display = "flex";
+        }
+    })
+
+    function SubmitAt(Index) {
+        socket.emit('submit', Index)
+    }
+
+    function updateChartData(newData) {
+        myChart.data.datasets[0].data = newData;
+        myChart.update(); // Cập nhật biểu đồ
+    }
+
+    socket.on('StatisticChart', Statistic => {
+        updateChartData(Statistic);
+        console.log(Statistic)
+    })
+
+    const listForbidenKeyCode = [16, 83, 91, 44]
+
+    var capture = 0
+
+    document.addEventListener('keyup', function(event) {
+        if(event.keyCode == 91) {
+            socket.emit('captureUser', "{{ user.username }}", ++capture)
+            document.body.style.display = 'none'
+            setTimeout(() => {
+                alert('Bạn không được phép chụp màn hình! Nếu bạn tiếp tục chụp màn hình, bạn sẽ bị đình chỉ!')
+            }, 1000)
+            setTimeout(() => {
+                document.body.style.display = 'block'
+            }, 10000)
+        }
+    });
+
+        const hidenNotebook = document.getElementById("hidenNotebook");
+    hidenNotebook.addEventListener("click", () => {
+        const backGroundSolutionFormInput = document.getElementsByClassName("backGroundSolutionFormInput")[0];
+        backGroundSolutionFormInput.style.opacity = "0";
+        backGroundSolutionFormInput.style.zIndex = "-1";
+        backGroundSolutionFormInput.style.visibility = "hidden";
+    })
+
+    const buttonSubmitLatex = document.getElementById("buttonSubmitLatex");
+    buttonSubmitLatex.addEventListener("click", () => {
+        const inputSubmitFormLatex = document.getElementById("inputSubmitFormLatex");
+        inputSubmitFormLatex.value = JSON.stringify(getContentOutput());
+        const Index = document.getElementById("idSubmitFormLatex").value
+        if(getContentOutput()){
+            socket.emit('submit', Index)
+            document.getElementById("submitFormLatex").submit();
+        }
+        else{
+            alert("Bạn chưa nhập lời giải")
+        }
+    })
+
+    function getContentOutput() {
+        const children = document.getElementById("SolutionFormOutput").children;
+        var OutputContent = {
+            type: "solution",
+            Sequence: [],
+        };
+        for (let i = 0; i < children.length; i++) {
+            if (children[i].tagName == "IMG") {
+                OutputContent.Sequence.push({
+                    type: "latex",
+                    content: children[i].src.slice(
+                        children[i].src.indexOf("svg.image?") + 10
+                    ),
+                });
+            }
+
+            if (children[i].tagName == "DIV") {
+                OutputContent.Sequence.push({
+                    type: "text",
+                    content: children[i].innerHTML,
+                });
+            }
+        }
+        return OutputContent;
+    }
+
+
+
+
+</script>
+<script>
+    // Dữ liệu mẫu (có thể thay thế bằng dữ liệu thực tế từ máy chủ hoặc API)
+    var data = {
+        labels: ["bài 1", "Bài 2", "Bài 3", "Bài 4", "Bài 5"],
+        datasets: [{
+            label: " Số lượng lời giải",
+            data: [{{ Statistic }}],
+        backgroundColor: '#90EE90', // Màu nền của cột
+        borderColor: '#76ee76', // Màu đường viền của cột
+        borderWidth: 1 // Độ rộng của đường viền cột
+    }]
+    };
+
+    // Cấu hình biểu đồ
+    var options = {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    };
+
+    // Vẽ biểu đồ
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar', // Loại biểu đồ là cột
+        data: data,
+        options: options
+    });
+    let newDatasetLabel = []
+    for (let index = 0; index < {{ ContestProblem.AmountProblem }}; index++) {
+        newDatasetLabel.push(`Bài ${index + 1}`)
+    }
+    myChart.data.labels = newDatasetLabel;
+    myChart.update();
+
+</script>
+<script src="/js/typeMath.js"></script>

@@ -1,0 +1,40 @@
+<link rel="stylesheet" href="./../../../../css/admin.css">
+<link rel="stylesheet" href="../../../css/member.css">
+<div class="result">
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    <a class="createAnnouncement" href="./contest/create">Tạo</a>
+
+                    STT
+                </th>
+                <th>Tên cuộc thi</th>
+                <th>Ngày tạo</th>
+                <th>Thời gian bắt đầu</th>
+                <th>Thời gian làm bài</th>
+                <th>Người tham gia</th>
+                <th>Tình trạng</th>
+                <th>Chức năng</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each contest}}
+            <tr>
+                <td>{{PlusOne @index}}</td>
+                <td>{{this.name}}</td>
+                <td>{{this.date}}</td>
+                <td>{{this.timeStart}}</td>
+                <td>{{this.timeTotal}}</td>
+                <td>{{this.AmountAttendee}}</td>
+                <td>{{this.status}}</td>
+                {{#condition ../userRole.role "admin"}}
+                <td><a href="contest/{{../this._id}}/detail">Chỉnh sửa</a></td>
+                {{else}}
+                <td><a href="contest/{{../this._id}}/participants">Người tham gia</a></td>
+                {{/condition}}
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
