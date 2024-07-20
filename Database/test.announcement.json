@@ -1,0 +1,173 @@
+[{
+  "_id": {
+    "$oid": "65ace9cdfcd98d9eaf98b658"
+  },
+  "title": "THÔNG BÁO ĐẦU TIÊN",
+  "description": "Chào mừng các bạn đến với website Phương Trình - Hệ Phương Trình (PTHPT) của chúng tôi. <br><br>\r\n\r\nPhương Trình - Hệ Phương Trình ( PTHPT ) là một trang chuyên về các phương trình và hệ phương trình vô tỉ. Với mục đích ban đầu được thiết kế nhằm hỗ trợ học tập và rèn luyện kỹ năng giải toán cho các bạn học sinh, sinh viên và giáo viên. Với mong muốn giúp đỡ và tạo ra môi trường học tập đáng tin cậy, PTHPT ra đời với những nội dung giáo dục phong phú, sẽ đồng hành cùng bạn trên hành trình chinh phục những thử thách toán học. <br><br>\r\n\r\nTrang web của chúng tôi tự hào sở hữu một kho tàng kiến thức vô cùng đa dạng về các dạng phương trình và hệ phương trình. Các bài tập được tổ chức và chia theo từng dạng, giúp các bạn dễ dàng nắm bắt và củng cố kiến thức từ cơ bản đến nâng cao. Ngoài ra, các nội dung được trình bày một cách rõ ràng và dễ hiểu, giúp bạn tiếp cận môn học một cách hiệu quả nhất. <br><br>\r\n\r\nĐặc biệt, PTHPT cũng tổ chức các cuộc thi, contest định kỳ để xếp loại và thúc đẩy tinh thần cạnh tranh giữa các bạn học sinh, sinh viên. Những đóng góp và thành tích xuất sắc sẽ được ghi nhận và đánh giá, giúp các bạn có động lực hơn để tiếp tục nỗ lực, vươn tới những thành công mới. <br><br>\r\n\r\nTối chủ nhật (14/01/2024) vừa rồi đã có cuộc họp chính thức từ các thành viên trong đội ngũ phát triển. <br>\r\n\r\n<img src=\"/img/1705282353004.png\">\r\n\r\n<h3>Cuộc họp đã diễn ra tốt đẹp với sự tham gia của các thành viên:</h3> <br>\r\n\r\n<ul style=\"list-style-type: circle; margin-left:50px\">\r\n    <li>Thành Trung</li>\r\n    <li>Ái Trân</li>\r\n    <li>Phương Anh</li>\r\n    <li>Nhật Huy</li>\r\n    <li>Võ Thiện</li>\r\n    <li>Bảo Khôi</li>\r\n    <li>Tuấn Kiệt</li>\r\n    <li>Đăng Quang</li>\r\n</ul>\r\n<br>\r\n<h3>Ghé thăm trang Fanpage chính thức của chúng tôi <a href=\"https://www.facebook.com/SolvingSystemsOfEquations\" style=\"color:red\">tại đây</a></h3>",
+  "time": "Sun Jan 21 2024 09:49:57 GMT+0000 (Coordinated Universal Time)",
+  "date": "21/1/2024",
+  "deleteAt": "",
+  "deleted": "0",
+  "likes": [
+    "Phuonganh",
+    "NguyenDangQuang",
+    "NTTrung9204",
+    "banana",
+    "nb.trgiang",
+    "Linh Như",
+    "letrungphong",
+    "Starlight",
+    "Lenhhoxung",
+    "anhkhoa09",
+    "nguyenkhang",
+    "kiennn",
+    "Andyy1607",
+    "viet.nguyen2005",
+    "dytien09",
+    "kqhuy2009",
+    "đố biết tớ là ai",
+    "khanhdangquoc",
+    "Dang_2611",
+    "duynam77",
+    "Puvi9104",
+    "Baodctcktes",
+    "nh_buithithuong",
+    "KHUNGOIBDT",
+    "hightierstudent",
+    "minzdapoet1102",
+    "duchuy228",
+    "Hoàng",
+    "anhduccute:))",
+    "vunguyenductoan",
+    "aitran",
+    "vtnhanfee1",
+    "phungquanlatoi",
+    "jondon",
+    "huyepic",
+    "duongtq",
+    "YeuPhuongThao",
+    "pt38-0133",
+    "Thái Hoàng",
+    "aspushkin",
+    "leanhvi-et",
+    "Emkhbit",
+    "hung2k5hht",
+    "Lam Trường YCT45",
+    "hieua3k76",
+    "Thanh Lam",
+    "KhaiMath",
+    "Luonghoclamhe",
+    "uocdochuyentoan",
+    "tuấn anh",
+    "Nguyễn Trí",
+    "dt13-0230",
+    "matcha",
+    "Khoi999",
+    "Lê Ngọc Tuấn",
+    "nguyentai",
+    "mikelostlove3",
+    "henryteo",
+    "dietthematon"
+  ],
+  "numberComment": 0,
+  "numberReact": 59,
+  "comment": [
+    {
+      "au": "Phuonganh",
+      "cmt": "Ta da ~~~\n",
+      "deleted": 0,
+      "deleteAt": "",
+      "time": {
+        "$date": "2024-01-22T04:23:47.208Z"
+      },
+      "date": "22/1/2024",
+      "cmt_id": "65adedd38ae9ac5acae2a912",
+      "likes": 1,
+      "liked": [
+        "NTTrung9204"
+      ],
+      "commentChild": [
+        {
+          "au": "NTTrung9204",
+          "cmt": "Hellooooooooo ~~~",
+          "deleted": 0,
+          "deleteAt": "",
+          "time": {
+            "$date": "2024-01-22T11:03:52.760Z"
+          },
+          "date": "22/1/2024",
+          "cmt_id": "65ae4b98426e193303efee6a",
+          "likes": 0,
+          "liked": []
+        }
+      ]
+    },
+    {
+      "au": "KHUNGOIBDT",
+      "cmt": "bantumlummmmmmmmmmmmmmmm\n",
+      "deleted": 1,
+      "deleteAt": "Tue Jan 30 2024 14:28:26 GMT+0000 (Coordinated Universal Time)",
+      "time": {
+        "$date": "2024-01-23T14:14:37.185Z"
+      },
+      "date": "23/1/2024",
+      "cmt_id": "65afc9cd05f5673368c5de92",
+      "likes": 1,
+      "liked": [
+        "NTTrung9204"
+      ],
+      "commentChild": [
+        {
+          "au": "NTTrung9204",
+          "cmt": ":)))))) Chào em",
+          "deleted": 0,
+          "deleteAt": "",
+          "time": {
+            "$date": "2024-01-23T14:18:32.362Z"
+          },
+          "date": "23/1/2024",
+          "cmt_id": "65afcab872d2066046f841f4",
+          "likes": 0,
+          "liked": []
+        }
+      ]
+    }
+  ],
+  "slug": "thong-bao-dau-tien",
+  "__v": 82
+},
+{
+  "_id": {
+    "$oid": "66043af9a0fb42ca46b114a2"
+  },
+  "title": "SÁCH MỖI NGÀY MỘT BÀI HỆ",
+  "description": "<h1>🍀🍀🍀CHÍNH THỨC MỞ BÁN SÁCH - MỖI NGÀY MỘT BÀI HỆ</h1>\r\n\r\n<span>Một cuốn sách rất hay hành cho các em học sinh muốn thi HSG hoặc Chuyên Toán</span><br>\r\n\r\n<img style=\"margin: 20px auto; border-radius: 15px; display: block; width: 700px\" src=\"/img/1711552761721.png\">\r\n\r\n🍀Phương trình – Hệ phương trình vô tỉ là một trong những nội dung quan trọng trong các kỳ thi tuyển sinh vào 10, thi chuyên toán hoặc Olympic khu vực hay HSG thành phố, quốc gia, quốc tế,… Để giải các bài toán về phương trình, hệ phương trình đỏi hỏi người làm toán phải có các kiến thức tổng hợp về đại số, giải tích. Do hình thức các bài toán rất phong phú và đa dạng nên bên cạnh những kiến thức cũng cần rất nhiều các kỹ năng, kỹ thuật và phương pháp để giải. <br><br>\r\n\r\n🍀Nhận thấy được những khó khăn mà chúng ta thường gặp phải, tác giả đã biên soạn cuốn sách “Mỗi ngày một bài hệ” nhằm giúp chúng ta tự rèn luyện, nâng cao tư duy sáng tạo và hướng xử lý các bài toán phương trình, hệ phương trình. Với hàng loạt những kiến thức và kỹ năng được bố trí hợp lý trong từng chương học, từng chủ đề trong quyển sách. <br><br>\r\n\r\n🍀Trong cuốn sách “Mỗi ngày một bài hệ”, tác giả đã trình bày các vấn đề và mô hình theo một trật tự logic để giúp độc giả tiếp thu các kiến thức một cách dễ dàng nhất. Đi theo cách bố trí trên, tác giả đã chia cuốn sách thành 5 chương : <br><br>\r\n\r\n<ul style=\"list-style-type: circle; margin-left:50px\">\r\n    <li>Chương I: Các phương pháp và kỹ thuật</li>\r\n    <li>Chương II: Phương trình và hệ phương trình đại số</li>\r\n    <li>Chương III: Các bài toán tổng hợp, rèn luyện và nâng cao.</li>\r\n    <li>Chương IV: Các bài tập tự luyện.</li>\r\n    <li>Chương V: Toán học và những câu truyện</li>\r\n</ul>\r\n<br>\r\n\r\n🍀Chương I. Trình bày các kỹ năng, kỹ thuật và phương pháp để giải các dạng toán tối ưu nhất, tốc độ nhanh nhất và độc đáo nhất. Các dạng toán ở đây được bố trí từ dễ đến khó và vô cùng phong phú. Ở cuối mỗi mục có kèm theo các bài tập tự luyện được áp dụng các tính chất đã được nêu ở phần phương pháp giải giúp bạn đọc có thể rèn luyện các kỹ năng của mình.<br><br>\r\n\r\n🍀 Chương II. Chương này trình bày về các cách giải tổng quát của những phương trình, hệ phương trình đại số. Và quan trọng là giúp chúng ta hiểu được tại sao lại cần phải xây dựng một nền móng thật vững chắc.<br><br>\r\n\r\n🍀Chương III là chương bao gồm các bài toán hay và khó, yêu cầu có tính xem xét, tư duy cao độ. Những bài toán ở chương này thường được giải theo nhiều cách, giúp độc giả có những góc nhìn, điểm hạn chế và ưu điểm của từng lời giải.<br><br>\r\n\r\n🍀Chương IV gồm rất nhiều bài tập tổng hợp từ dễ đến khó để các độc giả áp dụng và rèn luyện những kiến thức đã học được, giúp cải thiện các kinh nghiệm làm bài.<br><br>\r\n\r\n🍀Ngoài những kiến thức có trong cuốn sách này, tác giả còn dành ra một chương (chương 5) để trình bày các câu truyện vui và thú vị trong toán học cũng như là một số ứng dụng quan trọng của toán học trong đời sống hiện nay.<br><br>\r\n\r\n<h3>ĐẶT SÁCH <a href=\"https://forms.gle/PURZhNRr2QnPTdmT6\" style=\"color:red\">TẠI ĐÂY</a></h3>",
+  "time": "27/3/2024",
+  "date": "27/3/2024",
+  "deleteAt": "",
+  "deleted": "0",
+  "likes": [
+    "NTTrung9204",
+    "Lenhhoxung",
+    "duynam77",
+    "KhaiMath",
+    "uocdochuyentoan",
+    "lehuyhoang",
+    "phatphan",
+    "Duc Dũng",
+    "Dwc3290",
+    "matcha",
+    "Khoi999",
+    "sharingan-kxxk",
+    "mikelostlove3",
+    "PhanCongBaoHoa",
+    "Andyy1607",
+    "kendz2031hn",
+    "dietthematon"
+  ],
+  "numberComment": 0,
+  "numberReact": 17,
+  "comment": [],
+  "slug": "sach-moi-ngay-mot-bai-he",
+  "__v": 19
+}]

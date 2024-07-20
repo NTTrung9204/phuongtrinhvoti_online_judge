@@ -1,0 +1,207 @@
+[{
+  "_id": {
+    "$oid": "65acf959dc93a3d909e9a267"
+  },
+  "nameType": "Tất cả",
+  "Type": "",
+  "time": "Sun Jan 21 2024 10:54:33 GMT+0000 (Coordinated Universal Time)",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65ae4be1de4982bed03cfe33"
+  },
+  "nameType": "Liên hợp",
+  "Type": "LienHop",
+  "time": "Sun Jan 21 2024 16:48:50 GMT+0000 (Coordinated Universal Time)",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65ae6bf1de4982bed03cfe71"
+  },
+  "nameType": "Hàm đặc trưng",
+  "Type": "HamDacTrung",
+  "time": "Sun Jan 21 2024 16:48:50 GMT+0000 (Coordinated Universal Time)",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65ae7bbade4982bed03cfe9a"
+  },
+  "nameType": "Đánh giá",
+  "Type": "BatDangThuc",
+  "time": "Sun Jan 21 2024 16:48:50 GMT+0000 (Coordinated Universal Time)",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65ae85e6de4982bed03cfec9"
+  },
+  "nameType": "Tổng hợp",
+  "Type": "TongHop",
+  "time": "Sun Jan 21 2024 16:48:50 GMT+0000 (Coordinated Universal Time)",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65ae870fde4982bed03cfed4"
+  },
+  "nameType": "Phương trình bậc 3",
+  "Type": "PhuongTrinhBac3",
+  "time": "Sun Jan 21 2024 16:48:50 GMT+0000 (Coordinated Universal Time)",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65ae8873de4982bed03cfee5"
+  },
+  "nameType": "Đặt ẩn phụ",
+  "Type": "DatAnPhu",
+  "time": "Sun Jan 21 2024 16:48:50 GMT+0000 (Coordinated Universal Time)",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65ae8b36de4982bed03cff2e"
+  },
+  "nameType": "Lượng giác hóa",
+  "Type": "LuongGiac",
+  "time": "Sun Jan 21 2024 16:48:50 GMT+0000 (Coordinated Universal Time)",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65af9ebbde4982bed03cffcb"
+  },
+  "nameType": "Tổng bình phương",
+  "Type": "SOS",
+  "time": "Sun Jan 21 2024 16:48:50 GMT+0000 (Coordinated Universal Time)",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65afa086de4982bed03cffe2"
+  },
+  "nameType": "Phương trình bậc 2",
+  "Type": "PhuongTrinhBac2",
+  "time": "Sun Jan 21 2024 16:48:50 GMT+0000 (Coordinated Universal Time)",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65afc489de4982bed03d006f"
+  },
+  "nameType": "Bậc nhất 2 ẩn ",
+  "Type": "BacNhat2An",
+  "time": "Sun Jan 21 2024 16:48:50 GMT+0000 (Coordinated Universal Time)",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65afe70bde4982bed03d012a"
+  },
+  "nameType": "Hệ 3 ẩn",
+  "Type": "He3An",
+  "time": "Sun Jan 21 2024 16:48:50 GMT+0000 (Coordinated Universal Time)",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65b05c0dde4982bed03d0190"
+  },
+  "nameType": "Hệ đối xứng loại I",
+  "Type": "DoiXungLoaiI",
+  "time": "Sun Jan 21 2024 16:48:50 GMT+0000 (Coordinated Universal Time)",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65b095dede4982bed03d02cf"
+  },
+  "nameType": "Hệ đối xứng loại II",
+  "Type": "DoiXungLoaiII",
+  "time": "Sun Jan 21 2024 16:48:50 GMT+0000 (Coordinated Universal Time)",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65b0a0ecde4982bed03d036b"
+  },
+  "nameType": "Đẳng cấp",
+  "Type": "DangCap",
+  "time": "Sun Jan 21 2024 16:48:50 GMT+0000 (Coordinated Universal Time)",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65b0be51de4982bed03d03be"
+  },
+  "nameType": "Phân tích thành nhân tử",
+  "Type": "PhanTichThanhNhanTu",
+  "time": "Sun Jan 21 2024 16:48:50 GMT+0000 (Coordinated Universal Time)",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65b0dc2ade4982bed03d03fc"
+  },
+  "nameType": "Phương trình nghiệm nguyên",
+  "Type": "Diophantine",
+  "time": "Sun Jan 21 2024 16:48:50 GMT+0000 (Coordinated Universal Time)",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65b25408a2654d6fb378b52e"
+  },
+  "nameType": "Luỹ thừa",
+  "Type": "LuyThua",
+  "time": "Thu Jan 25 2024 02:05:45 GMT+0000 (Coordinated Universal Time)",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65b48ccea2654d6fb378b968"
+  },
+  "nameType": "Cộng đại số",
+  "Type": "CongDaiSo",
+  "time": "Thu Jan 25 2024 02:05:45 GMT+0000 (Coordinated Universal Time)",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65b54496a2654d6fb378ba94"
+  },
+  "nameType": "Cơ bản",
+  "Type": "CoBan",
+  "time": "Thu Jan 25 2024 02:05:45 GMT+0000 (Coordinated Universal Time)",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65b63715a2654d6fb378bd9f"
+  },
+  "nameType": "Phương pháp Hàm số",
+  "Type": "HamSo",
+  "time": "Thu Jan 25 2024 02:05:45 GMT+0000 (Coordinated Universal Time)",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65b70feea2654d6fb378bfe1"
+  },
+  "nameType": "Phương pháp thế",
+  "Type": "PPTHE",
+  "time": "Thu Jan 25 2024 02:05:45 GMT+0000 (Coordinated Universal Time)",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65e554e7a6d02a66b44ab182"
+  },
+  "nameType": "Toán cao cấp",
+  "Type": "ToanCaoCap",
+  "time": "Mon Mar 04 2024 04:50:54 GMT+0000 (Coordinated Universal Time)",
+  "__v": 0
+}]
